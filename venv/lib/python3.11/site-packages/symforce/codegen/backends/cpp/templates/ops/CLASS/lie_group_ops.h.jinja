@@ -1,0 +1,53 @@
+{# ----------------------------------------------------------------------------
+ # SymForce - Copyright 2022, Skydio, Inc.
+ # This source code is under the Apache 2.0 license found in the LICENSE file.
+ # ---------------------------------------------------------------------------- #}
+
+{%- import "../../util/util.jinja" as util with context -%}
+
+#pragma once
+
+#include <Eigen/Dense>
+
+#include "../lie_group_ops.h"
+
+// Forward declare class, without including header
+// Note(brad): We can't include the class header here because the class header
+// includes "./group_ops.h", which requires the template specialization definition
+// of TangentDim(), which is defined below. If you try, you'll get used before definition
+// errors.
+namespace sym {
+template<typename ScalarType> class {{ cls.__name__ }};
+}  // namespace sym
+
+namespace sym {
+
+/**
+ * C++ LieGroupOps implementation for {{ cls }}.
+ */
+template <typename Scalar>
+struct LieGroupOps<{{ cls.__name__ }}<Scalar>> : public internal::LieGroupOpsBase<{{ cls.__name__ }}<Scalar>, Scalar> {
+  using T = {{ cls.__name__ }}<Scalar>;
+
+  static constexpr int32_t TangentDim() {
+      return {{ ops.LieGroupOps.tangent_dim(cls) }};
+  }
+
+  using TangentVec = Eigen::Matrix<Scalar, TangentDim(), 1>;
+
+  {% for spec in specs['LieGroupOps'] %}
+  static {{ python_util.str_replace_all(
+    util.function_declaration(spec, is_declaration=True),
+    {
+      "sym::" + cls.__name__ + "<Scalar>": "T",
+      "Eigen::Matrix<Scalar, {}, 1>".format(ops.LieGroupOps.tangent_dim(cls)): "TangentVec"
+    }) -}};
+  {% endfor %}
+};
+
+}  // namespace sym
+
+// Explicit instantiation
+{% for Scalar in scalar_types %}
+extern template struct sym::LieGroupOps<sym::{{ cls.__name__ }}<{{ Scalar }}>>;
+{% endfor %}

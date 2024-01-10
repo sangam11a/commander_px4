@@ -1,0 +1,18 @@
+{#-
+ # Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ # Copyright (C) 2021  OpenCyphal Development Team  <opencyphal.org>
+ # This software is distributed under the terms of the MIT License.
+-#}
+{%- for field in composite_type.fields_except_padding %}
+    {% if loop.first %}
+    // +----------------------------------------------------------------------+
+    // | FIELDS
+    // +----------------------------------------------------------------------+
+    {% endif -%}
+    {{ field.doc | block_comment('cpp-doxygen', 4, 120) }}
+    {% if options.ctor_convention != ConstructorConvention.Default.value -%}
+    _traits_::TypeOf::{{field.name|id}} {{ field | id }};
+    {%- else -%}
+    _traits_::TypeOf::{{field.name|id}} {{ field | id }}{{ field.data_type | default_value_initializer }};
+    {%- endif -%}
+{%- endfor -%}

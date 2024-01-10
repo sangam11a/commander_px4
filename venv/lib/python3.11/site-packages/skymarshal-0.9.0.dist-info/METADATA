@@ -1,0 +1,35 @@
+Metadata-Version: 2.1
+Name: skymarshal
+Version: 0.9.0
+Summary: Python implementation of marshalling for LCM messages
+Home-page: https://github.com/symforce-org/symforce/tree/main/third_party/skymarshal
+Author: "Skydio, Inc"
+License: LGPL-2.1-or-later
+Project-URL: Bug Tracker, https://github.com/symforce-org/symforce/issues
+Project-URL: Source, https://github.com/symforce-org/symforce/tree/main/third_party/skymarshal
+Classifier: Intended Audience :: Developers
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Code Generators
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: argh
+Requires-Dist: jinja2
+Requires-Dist: numpy
+Requires-Dist: ply
+Requires-Dist: six
+
+SkyMarshal
+==========
+
+Simple cross-language message definitions with marshalling/unmarshalling code generation.
+
+An easy-to-maintain pure-Python implementation of `lcm-gen` of the
+[LCM Project](https://github.com/lcm-proj/lcm), with wire format compatibility.  Skymarshal adds additional features, including more supported languages and additional features for existing
+languages.
+
+Built by [Skydio](https://skydio.com), used by [SymForce](https://symforce.org).

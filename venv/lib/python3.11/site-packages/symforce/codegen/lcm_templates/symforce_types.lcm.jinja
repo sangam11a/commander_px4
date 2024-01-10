@@ -1,0 +1,51 @@
+{# ----------------------------------------------------------------------------
+ # SymForce - Copyright 2022, Skydio, Inc.
+ # This source code is under the Apache 2.0 license found in the LICENSE file.
+ # ---------------------------------------------------------------------------- #}
+package sym;
+
+/**
+ * Data types that can be stored in a Values object.
+ */
+enum type_t : int32_t {
+  INVALID = 0,
+
+  // Scalar type
+  SCALAR = 1,
+
+  // Geometry types
+  {% set k = namespace(value=2) %}
+  {% for cls in sf.GEO_TYPES %}
+  {{ python_util.camelcase_to_screaming_snakecase(cls.__name__) }} = {{ k.value }},
+  {% set k.value = k.value + 1 %}
+  {% if k.value == 6 %}
+    {# Skip 6, used for DATABUFFER #}
+    {% set k.value = k.value + 1 %}
+  {% endif %}
+  {% endfor %}
+
+  // DataBuffer
+  DATABUFFER = 6,
+
+  // Vector types, dynamic and fixed
+  VECTORX = 10,
+  {% set k = namespace(value=11) %}
+  {% for i in range(1, 10) %}
+  VECTOR{{ i }} = {{ k.value }},
+  {% set k.value = k.value + 1 %}
+  {% endfor %}
+
+  // Matrix types, dynamic and fixed
+  {% for i in range(1, 10) %}
+  {% for j in range(2, 10) %}
+  MATRIX{{ i }}{{ j }} = {{ k.value }},
+  {% set k.value = k.value + 1 %}
+  {% endfor %}
+  {% endfor %}
+
+  // Camera calibrations
+  {% for cls in sf.CAM_TYPES %}
+  {{ python_util.camelcase_to_screaming_snakecase(cls.__name__) }} = {{ k.value }},
+  {% set k.value = k.value + 1 %}
+  {% endfor %}
+};

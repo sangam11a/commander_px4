@@ -1,0 +1,10 @@
+
+
+{
+		"fields": "\u0089 timestamp;\u008a[58] data;\u0087 id;\u008d[10] name;\u0086[4] _padding0;",
+		"fields_total_length": 81,
+		"orb_ids": [34],
+		"main_orb_id": 34,
+		"dependencies": [],
+		"name": "px4/DebugArray"
+}

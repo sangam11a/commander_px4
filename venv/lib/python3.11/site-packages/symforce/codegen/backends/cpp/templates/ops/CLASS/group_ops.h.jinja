@@ -1,0 +1,52 @@
+{# ----------------------------------------------------------------------------
+ # SymForce - Copyright 2022, Skydio, Inc.
+ # This source code is under the Apache 2.0 license found in the LICENSE file.
+ # ---------------------------------------------------------------------------- #}
+
+{%- import "../../util/util.jinja" as util with context -%}
+
+#pragma once
+
+#include <Eigen/Dense>
+
+#include <sym/{{ camelcase_to_snakecase(cls.__name__) }}.h>
+
+#include "../group_ops.h"
+#include "./lie_group_ops.h"
+
+// Forward declare class, without including header
+// We could include the class header here, but we forward declare to be consistent
+// with "./group_ops.h", which must forward declare. See that file for an explanation.
+namespace sym {
+template<typename ScalarType> class {{ cls.__name__ }};
+}  // namespace sym
+
+namespace sym {
+
+/**
+ * C++ GroupOps implementation for {{ cls }}.
+ */
+template <typename Scalar>
+struct GroupOps<{{ cls.__name__ }}<Scalar>> {
+  using T = {{ cls.__name__ }}<Scalar>;
+  using SelfJacobian = Eigen::Matrix<Scalar, LieGroupOps<T>::TangentDim(), LieGroupOps<T>::TangentDim()>;
+
+  {% set dim = ops.LieGroupOps.tangent_dim(cls) %}
+  {% for spec in specs['GroupOps'] %}
+  static {{ python_util.str_replace_all(
+    util.function_declaration(spec, is_declaration=True),
+    {
+      "sym::" + cls.__name__ + "<Scalar>": "T",
+      "Eigen::Matrix<Scalar, {}, {}>".format(dim, dim): "SelfJacobian"
+    }
+    )}};
+  {% endfor %}
+};
+
+
+}  // namespace sym
+
+// Explicit instantiation
+{% for Scalar in scalar_types %}
+extern template struct sym::GroupOps<sym::{{ cls.__name__ }}<{{ Scalar }}>>;
+{% endfor %}

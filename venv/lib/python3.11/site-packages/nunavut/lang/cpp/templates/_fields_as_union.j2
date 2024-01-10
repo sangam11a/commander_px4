@@ -1,0 +1,183 @@
+{#-
+ # Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ # Copyright (C) 2021  OpenCyphal Development Team  <opencyphal.org>
+ # This software is distributed under the terms of the MIT License.
+#}
+    class VariantType final
+    {
+        std::size_t tag_;
+
+        union internal_union_t
+        {
+{%- for field in composite_type.fields_except_padding %}
+            {{ field.doc | block_comment('cpp-doxygen', 12, 120) }}
+            std::aligned_storage<sizeof({{ field.data_type | declaration }}), alignof({{ field.data_type | declaration }})>::type {{ field.name | id }};
+{%- endfor %}
+        } internal_union_value_;
+
+    public:
+        static const constexpr std::size_t variant_npos = std::numeric_limits<std::size_t>::max();
+
+        VariantType()
+            : tag_(0)
+            , internal_union_value_()
+        {
+            // This is how the C++17 standard library does it; default initialization as the 0th index.
+            emplace<0>();
+        }
+
+        VariantType(const VariantType& rhs)
+            : tag_(variant_npos)
+            , internal_union_value_()
+        {
+{%- for field in composite_type.fields_except_padding %}
+            {% if not loop.first %}else {% endif %}if(rhs.tag_ == {{ loop.index0 }})
+            {
+                do_copy<{{ loop.index0 }}>(
+                    *reinterpret_cast<std::add_pointer<const {{ field.data_type | declaration }}>::type>(&rhs.internal_union_value_.{{ field.name | id }})
+                );
+            }
+{%- endfor %}
+            tag_ = rhs.tag_;
+        }
+
+        VariantType(VariantType&& rhs)
+            : tag_(variant_npos)
+            , internal_union_value_()
+        {
+{%- for field in composite_type.fields_except_padding %}
+            {% if not loop.first %}else {% endif %}if(rhs.tag_ == {{ loop.index0 }})
+            {
+                do_emplace<{{ loop.index0 }}>(
+                    std::forward<{{ field.data_type | declaration }}>(
+                        *reinterpret_cast<std::add_pointer<{{ field.data_type | declaration }}>::type>(&rhs.internal_union_value_.{{ field.name | id }})
+                    )
+                );
+            }
+{%- endfor %}
+            tag_ = rhs.tag_;
+        }
+        VariantType& operator=(const VariantType& rhs)
+        {
+            destroy_current();
+{%- for field in composite_type.fields_except_padding %}
+            {% if not loop.first %}else {% endif %}if(rhs.tag_ == {{ loop.index0 }})
+            {
+                do_copy<{{ loop.index0 }}>(
+                    *reinterpret_cast<std::add_pointer<const {{ field.data_type | declaration }}>::type>(&rhs.internal_union_value_.{{ field.name | id }})
+                );
+            }
+{%- endfor %}
+            tag_ = rhs.tag_;
+            return *this;
+        }
+
+        VariantType& operator=(VariantType&& rhs)
+        {
+            destroy_current();
+{%- for field in composite_type.fields_except_padding %}
+            {% if not loop.first %}else {% endif %}if(rhs.tag_ == {{ loop.index0 }})
+            {
+                do_emplace<{{ loop.index0 }}>(
+                    std::forward<{{ field.data_type | declaration }}>(
+                        *reinterpret_cast<std::add_pointer<{{ field.data_type | declaration }}>::type>(&rhs.internal_union_value_.{{ field.name | id }})
+                    )
+                );
+            }
+{%- endfor %}
+            tag_ = rhs.tag_;
+            return *this;
+        }
+
+        ~VariantType()
+        {
+            destroy_current();
+        }
+
+        size_t index() const{
+            return tag_;
+        }
+
+        struct IndexOf final
+        {
+            IndexOf() = delete;
+{%- for field in composite_type.fields_except_padding %}
+            static constexpr const std::size_t {{ field.name | id }} = {{ loop.index0 }}U;
+{%- endfor %}
+        };
+        static constexpr const std::size_t MAX_INDEX = {{ composite_type.fields_except_padding  | length }}U;
+
+        template<std::size_t I, class...Types> struct alternative;
+
+{% for field in composite_type.fields_except_padding %}
+        template<class...Types> struct alternative<{{ loop.index0 }}U, Types...>
+        {
+            using type = {{ field.data_type | declaration }};
+            static constexpr auto pointer = &VariantType::internal_union_t::{{ field.name | id }};
+        };
+{%- endfor %}
+
+        template<std::size_t I, class... Args> typename VariantType::alternative<I, VariantType>::type& emplace(Args&&... v)
+        {
+            destroy_current();
+            typename alternative<I>::type& result = do_emplace<I>(v...);
+            tag_ = I;
+            return result;
+        }
+
+        template<std::size_t I, class... Types>
+        static constexpr typename alternative<I, VariantType>::type* get_if(VariantType* v) noexcept
+        {
+            return (v) ? v->do_get_if<I>() : nullptr;
+        }
+
+        template<std::size_t I, class... Types>
+        static constexpr const typename alternative<I, VariantType>::type* get_if(const VariantType* v) noexcept
+        {
+            return (v) ? v->do_get_if_const<I>() : nullptr;
+        }
+
+    private:
+        template<std::size_t I, class... Args> typename VariantType::alternative<I, VariantType>::type& do_emplace(Args&&... v)
+        {
+            return *(new (&(internal_union_value_.*(alternative<I>::pointer)) ) {# -#}
+                typename alternative<I>::type(std::forward<Args>(v)...));
+        }
+
+        template<std::size_t I, class... Args> typename VariantType::alternative<I, VariantType>::type& do_copy(const Args&... v)
+        {
+            return *(new (&(internal_union_value_.*(alternative<I>::pointer)) ) {# -#}
+                typename alternative<I>::type(typename alternative<I>::type(v...)));
+        }
+
+        template<std::size_t I, class... Types>
+        constexpr typename VariantType::alternative<I, VariantType>::type* do_get_if() noexcept
+        {
+            return (tag_ == I) ? {# -#}
+                reinterpret_cast<typename std::add_pointer<typename VariantType::alternative<I>::type>::type>({# -#}
+                    &(internal_union_value_.*(alternative<I>::pointer)){# -#}
+                ) : nullptr;
+        }
+
+        template<std::size_t I, class... Types>
+        constexpr const typename VariantType::alternative<I, VariantType>::type* do_get_if_const() const noexcept
+        {
+            return (tag_ == I) ? {# -#}
+                reinterpret_cast<typename std::add_pointer<const typename VariantType::alternative<I>::type>::type>({# -#}
+                    &(internal_union_value_.*(alternative<I>::pointer)){# -#}
+            ) : nullptr;
+        }
+
+        void destroy_current()
+        {
+{%- for field in composite_type.fields_except_padding if field is not PrimitiveType %}
+            {% if not loop.first %}else {% endif %}if (tag_ == {{ loop.index0 }})
+            {
+                reinterpret_cast<{{ field.data_type | declaration }}*>(std::addressof(internal_union_value_.{{ field.name | id }}))->{{ field.data_type | destructor_name }}();
+            }
+{%- endfor %}
+        }
+
+    };
+
+    VariantType union_value;

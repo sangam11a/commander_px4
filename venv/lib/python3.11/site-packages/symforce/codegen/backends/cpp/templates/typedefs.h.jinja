@@ -1,0 +1,42 @@
+{# ----------------------------------------------------------------------------
+ # SymForce - Copyright 2022, Skydio, Inc.
+ # This source code is under the Apache 2.0 license found in the LICENSE file.
+ # ---------------------------------------------------------------------------- #}
+
+#pragma once
+
+#include <Eigen/Dense>
+
+namespace sym {
+
+template <typename Scalar>
+using VectorX = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
+
+template <typename Scalar>
+using MatrixX = Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic>;
+
+{% for i in range(1, 10) %}
+template <typename Scalar>
+using Vector{{i}} = Eigen::Matrix<Scalar, {{i}}, 1>;
+{% endfor %}
+
+{% for i in range(1, 10) %}
+{% for j in range(1, 10) %}
+template <typename Scalar>
+using Matrix{{i}}{{j}} = Eigen::Matrix<Scalar, {{i}}, {{j}}>;
+{% endfor %}
+{% endfor %}
+
+{% for i in range(1, 10) %}
+using Vector{{i}}d = Vector{{i}}<double>;
+using Vector{{i}}f = Vector{{i}}<float>;
+{% endfor %}
+
+{% for i in range(1, 10) %}
+{% for j in range(1, 10) %}
+using Matrix{{i}}{{j}}d = Matrix{{i}}{{j}}<double>;
+using Matrix{{i}}{{j}}f = Matrix{{i}}{{j}}<float>;
+{% endfor %}
+{% endfor %}
+
+}  // namespace sym

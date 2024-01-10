@@ -1,0 +1,10 @@
+
+
+{
+		"fields": "\u0089 timestamp;\u008a voltage_v;\u008a voltage_filtered_v;\u008a current_a;\u008a current_filtered_a;\u008a current_average_a;\u008a discharged_mah;\u008a remaining;\u008a scale;\u008a time_remaining_s;\u008a temperature;\u008a[14] voltage_cell_v;\u008a max_cell_voltage_delta;\u0088 custom_faults;\u008a average_power;\u008a available_energy;\u008a full_charge_capacity_wh;\u008a remaining_capacity_wh;\u008a design_capacity;\u008a nominal_voltage;\u0087 capacity;\u0087 cycle_count;\u0087 average_time_to_empty;\u0087 serial_number;\u0087 manufacture_date;\u0087 state_of_health;\u0087 max_error;\u0087 interface_error;\u0087 faults;\u0087 average_time_to_full;\u0087 over_discharge_count;\u008c connected;\u0086 cell_count;\u0086 source;\u0086 priority;\u0086 id;\u008c is_powering_off;\u008c is_required;\u0086 warning;\u0086 mode;\u0086[1] _padding0;",
+		"fields_total_length": 866,
+		"orb_ids": [19],
+		"main_orb_id": 19,
+		"dependencies": [],
+		"name": "px4/BatteryStatus"
+}

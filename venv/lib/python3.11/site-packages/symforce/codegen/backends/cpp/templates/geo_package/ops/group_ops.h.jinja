@@ -1,0 +1,38 @@
+{# ----------------------------------------------------------------------------
+ # SymForce - Copyright 2022, Skydio, Inc.
+ # This source code is under the Apache 2.0 license found in the LICENSE file.
+ # ---------------------------------------------------------------------------- #}
+
+#pragma once
+
+#include "./lie_group_ops.h"
+
+namespace sym {
+
+/**
+ * C++ GroupOps concept, specialized per type.
+ * See `symforce.ops.group_ops` for details.
+ */
+template <typename T>
+struct GroupOps {
+  static T Identity();
+  static T Inverse(const T& a);
+  static T Compose(const T& a, const T& b);
+  static T Between(const T& a, const T& b);
+
+  using SelfJacobian =
+      Eigen::Matrix<typename T::Scalar, LieGroupOps<T>::TangentDim(), LieGroupOps<T>::TangentDim()>;
+
+  static T InverseWithJacobian(const T& a, SelfJacobian* const res_D_a);
+
+  static T ComposeWithJacobians(const T& a, const T& b, SelfJacobian* const res_D_a,
+                                SelfJacobian* const res_D_b);
+
+  static T BetweenWithJacobians(const T& a, const T& b, SelfJacobian* const res_D_a,
+                                SelfJacobian* const res_D_b);
+};
+
+}  // namespace sym
+
+#include "./scalar/group_ops.h"
+#include "./matrix/group_ops.h"

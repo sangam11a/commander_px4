@@ -1,0 +1,4 @@
+cc_sym
+lcmtypes
+symengine
+symforce

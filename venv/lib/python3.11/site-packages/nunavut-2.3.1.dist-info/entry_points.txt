@@ -1,0 +1,2 @@
+[console_scripts]
+nnvg = nunavut.__main__:main

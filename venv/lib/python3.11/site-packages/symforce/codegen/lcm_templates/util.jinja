@@ -1,0 +1,86 @@
+{# ----------------------------------------------------------------------------
+ # SymForce - Copyright 2022, Skydio, Inc.
+ # This source code is under the Apache 2.0 license found in the LICENSE file.
+ # ---------------------------------------------------------------------------- #}
+
+{# ------------------------------------------------------------------------- #}
+{# Utilities for LCM type generation template                                #}
+{# ------------------------------------------------------------------------- #}
+
+{# ------------------------------------------------------------------------- #}
+
+{# Returns the right size of eigen lcm type to use
+ #
+ # third_party/eigen_lcm/lcmtypes/eigen_lcm.lcm only supports up to Cector8, so for anything
+ # larger we use VectorX (Note that VectorX won't work with storage ops at present)
+ #
+ # Args:
+ #      dim (int): storage dimension
+#}
+{%- macro eigen_lcm_dim(dim) -%}
+{%- if dim <= 8 -%}
+{{- dim -}}
+{%- else -%}
+X
+{%- endif -%}
+{%- endmacro -%}
+
+{# Returns declaration of an eigen lcm type
+ #
+ # Args:
+ #     scalar_type (str): double or float
+ #     dim (int): storage dimension
+ #}
+{%- macro eigen_lcm_type(scalar_type, dim) -%}
+{%- if scalar_type == "float" -%}
+eigen_lcm.Vector{{- eigen_lcm_dim(dim) -}}f
+{%- else -%}
+eigen_lcm.Vector{{- eigen_lcm_dim(dim) -}}d
+{%- endif -%}
+{%- endmacro -%}
+
+{# ------------------------------------------------------------------------- #}
+
+{# Returns declaration of base element of a list (e.g. a type, double/float, or eigen vector)
+ #
+ # Args:
+ #     scalar_type (str): double or float
+ #     index: Index of a list
+ #}
+{% macro get_list_type(scalar_type, index) -%}
+{% set index_element = (index.values() | list)[0] -%}
+{% set datatype = index_element.datatype() -%}
+{% if issubclass(datatype, (list, tuple)) -%}
+    {% set sub_index = index_element.item_index -%}
+{{ get_list_type(scalar_type, sub_index) -}}
+{% elif issubclass(datatype, T.Scalar) -%}
+{{ scalar_type -}}
+{% else -%}
+    {% if use_eigen_types -%}
+{{ eigen_lcm_type(scalar_type, index_element.storage_dim) -}}
+    {% else -%}
+{{ scalar_type -}}
+    {% endif -%}
+{% endif -%}
+{% endmacro -%}
+
+{# ------------------------------------------------------------------------- #}
+
+{# Appends the number of subelements or the storage dim of the given index
+ #
+ # Args:
+ #     index: Index of a list
+ #}
+{%- macro get_list_dims(index) -%}
+[{{- index | length -}}]
+    {%- set index_element = (index.values() | list)[0] -%}
+    {%- set datatype = index_element.datatype() -%}
+{%- if issubclass(datatype, (list, tuple)) -%}
+    {%- set sub_index = index_element.item_index -%}
+{{- get_list_dims(sub_index) -}}
+{%- elif not issubclass(datatype, (Values, T.Scalar)) and not use_eigen_types -%}
+    {# if using eigen types, the dimension of the base element is given by the eigen vector dim,
+     # so we should return nothing #}
+[{{- index_element.storage_dim -}}]
+{%- endif -%}
+{%- endmacro -%}

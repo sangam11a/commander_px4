@@ -172,12 +172,12 @@ void SystemChecks::checkAndReport(const Context &context, Report &reporter)
 	}
 
 	// Arm Requirements: authorization
-	if (_param_com_arm_auth_req.get() != 0 && !context.isArmed()) {
-		if (arm_auth_check() != vehicle_command_ack_s::VEHICLE_CMD_RESULT_ACCEPTED) {
-			/* EVENT
-			 */
-			reporter.armingCheckFailure(NavModes::All, health_component_t::system, events::ID("check_system_arm_auth_failed"),
-						    events::Log::Error, "Arm authorization denied");
-		}
-	}
+	// if (_param_com_arm_auth_req.get() != 0 && !context.isArmed()) {
+	// 	if (arm_auth_check() != vehicle_command_ack_s::VEHICLE_CMD_RESULT_ACCEPTED) {
+	// 		/* EVENT
+	// 		 */
+	// 		reporter.armingCheckFailure(NavModes::All, health_component_t::system, events::ID("check_system_arm_auth_failed"),
+	// 					    events::Log::Error, "Arm authorization denied");
+	// 	}
+	// }
 }

@@ -1,0 +1,32 @@
+{# ----------------------------------------------------------------------------
+ # SymForce - Copyright 2022, Skydio, Inc.
+ # This source code is under the Apache 2.0 license found in the LICENSE file.
+ # ---------------------------------------------------------------------------- #}
+{%- import "../util/util.jinja" as util with context -%}
+
+# pylint: disable=too-many-locals,too-many-lines,too-many-statements,unused-argument,unused-import
+
+import math
+import typing as T
+
+{% if spec.config.use_numba %}
+import numba
+{% endif %}
+import numpy
+{% set sparse_values = spec.print_code_results.sparse_terms | length %}
+{% if sparse_values != 0 %}
+from scipy import sparse
+{% endif %}
+
+import sym
+
+
+{% if spec.config.use_numba %}
+@numba.njit
+{% endif %}
+{{ util.function_declaration(spec) }}
+    {% if spec.docstring %}
+    {{ util.print_docstring(spec.docstring) | indent(4) }}
+    {% endif %}
+
+    {{ util.expr_code(spec) }}

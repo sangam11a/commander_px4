@@ -1,0 +1,36 @@
+{# ----------------------------------------------------------------------------
+ # SymForce - Copyright 2022, Skydio, Inc.
+ # This source code is under the Apache 2.0 license found in the LICENSE file.
+ # ---------------------------------------------------------------------------- #}
+
+#pragma once
+
+#include {{ lcm_type_t_include_dir }}
+
+namespace sym {
+
+/**
+ * C++ StorageOps concept, specialized per type.
+ * See `symforce.ops.storage_ops` for details.
+ */
+template <typename T>
+struct StorageOps {
+  using Scalar = typename T::Scalar;
+  static constexpr int32_t StorageDim();
+  static void ToStorage(const T& a, Scalar* out);
+  static T FromStorage(const Scalar* data);
+  static constexpr type_t TypeEnum();
+
+  template <typename Generator>
+  static T Random(Generator& gen);
+};
+
+template <typename T, typename Generator>
+T Random(Generator& gen) {
+  return StorageOps<T>::Random(gen);
+}
+
+}  // namespace sym
+
+#include "./scalar/storage_ops.h"
+#include "./matrix/storage_ops.h"

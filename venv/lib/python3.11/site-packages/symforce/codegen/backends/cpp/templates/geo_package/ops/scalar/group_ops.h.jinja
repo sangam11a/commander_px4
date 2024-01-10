@@ -1,0 +1,54 @@
+{# ----------------------------------------------------------------------------
+ # SymForce - Copyright 2022, Skydio, Inc.
+ # This source code is under the Apache 2.0 license found in the LICENSE file.
+ # ---------------------------------------------------------------------------- #}
+
+
+#pragma once
+
+#include <cstdint>
+#include <type_traits>
+
+#include "../group_ops.h"
+
+namespace sym {
+namespace scalar {
+
+/**
+ * C++ GroupOps implementation for scalars.
+ */
+template <typename T>
+struct GroupOps {
+  using Scalar = T;
+  static_assert(std::is_floating_point<T>::value, "");
+
+  static T Identity() {
+    return 0.0;
+  }
+
+  static T Inverse(const T& a) {
+    return -a;
+  }
+
+  static T Compose(const T& a, const T& b) {
+    return b + a;
+  }
+
+  static T Between(const T& a, const T& b) {
+    return b - a;
+  }
+};
+
+}  // namespace scalar
+
+{% for scalar in scalar_types %}
+template<>
+struct GroupOps<{{ scalar }}> : public scalar::GroupOps<{{ scalar }}> {};
+{% endfor %}
+
+}  // namespace sym
+
+// Explicit instantiation
+{% for scalar in scalar_types %}
+extern template struct sym::GroupOps<{{ scalar }}>;
+{% endfor %}

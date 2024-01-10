@@ -1,0 +1,24 @@
+{# ----------------------------------------------------------------------------
+ # SymForce - Copyright 2022, Skydio, Inc.
+ # This source code is under the Apache 2.0 license found in the LICENSE file.
+ # ---------------------------------------------------------------------------- #}
+
+{%- import "util/util.jinja" as util with context -%}
+
+#pragma once
+
+#include <symforce/opt/key.h>
+
+namespace {{ namespace }} {
+
+namespace Keys {
+
+{% for name, generated_key, type_or_value in vars %}
+    {%- set key_expr = util.format_sym_key(generated_key) -%}
+    {%- set typename = util.format_typename(type_or_value, name) -%}
+static const sym::Key {{ name.upper() }} = {{ key_expr }}; // {{ typename }}
+{% endfor %}
+
+}  // namespace Keys
+
+}  // namespace {{ namespace }}

@@ -36,7 +36,7 @@
 /*   Helper classes  */
 #include "failsafe/failsafe.h"
 #include "failure_detector/FailureDetector.hpp"
-#include "HealthAndArmingChecks/HealthAndArmingChecks.hpp"
+// #include "HealthAndArmingChecks/HealthAndArmingChecks.hpp"
 #include "HomePosition.hpp"
 #include "ModeManagement.hpp"
 #include "MulticopterThrowLaunch/MulticopterThrowLaunch.hpp"
@@ -65,8 +65,6 @@
 #include <uORB/SubscriptionInterval.hpp>
 #include <uORB/SubscriptionMultiArray.hpp>
 #include <uORB/topics/action_request.h>
-#include <uORB/topics/airspeed.h>
-#include <uORB/topics/battery_status.h>
 #include <uORB/topics/cpuload.h>
 #include <uORB/topics/distance_sensor.h>
 #include <uORB/topics/iridiumsbd_status.h>

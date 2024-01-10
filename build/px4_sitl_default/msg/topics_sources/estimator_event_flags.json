@@ -1,0 +1,10 @@
+
+
+{
+		"fields": "\u0089 timestamp;\u0089 timestamp_sample;\u0088 information_event_changes;\u0088 warning_event_changes;\u008c gps_checks_passed;\u008c reset_vel_to_gps;\u008c reset_vel_to_flow;\u008c reset_vel_to_vision;\u008c reset_vel_to_zero;\u008c reset_pos_to_last_known;\u008c reset_pos_to_gps;\u008c reset_pos_to_vision;\u008c starting_gps_fusion;\u008c starting_vision_pos_fusion;\u008c starting_vision_vel_fusion;\u008c starting_vision_yaw_fusion;\u008c yaw_aligned_to_imu_gps;\u008c reset_hgt_to_baro;\u008c reset_hgt_to_gps;\u008c reset_hgt_to_rng;\u008c reset_hgt_to_ev;\u008c gps_quality_poor;\u008c gps_fusion_timout;\u008c gps_data_stopped;\u008c gps_data_stopped_using_alternate;\u008c height_sensor_timeout;\u008c stopping_navigation;\u008c invalid_accel_bias_cov_reset;\u008c bad_yaw_using_gps_course;\u008c stopping_mag_use;\u008c vision_data_stopped;\u008c emergency_yaw_reset_mag_stopped;\u008c emergency_yaw_reset_gps_yaw_stopped;\u0086[3] _padding0;",
+		"fields_total_length": 907,
+		"orb_ids": [71],
+		"main_orb_id": 71,
+		"dependencies": [],
+		"name": "px4/EstimatorEventFlags"
+}
