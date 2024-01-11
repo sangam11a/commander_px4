@@ -131,9 +131,9 @@ private:
 
 	transition_result_t disarm(arm_disarm_reason_t calling_reason, bool forced = false);
 
-	void battery_status_check();
+	// void battery_status_check();
 
-	void control_status_leds(bool changed, const uint8_t battery_warning);
+	// void control_status_leds(bool changed, const uint8_t battery_warning);
 
 	/**
 	 * Checks the status of all available data links and handles switching between different system telemetry states.
@@ -162,7 +162,7 @@ private:
 
 	void updateControlMode();
 
-	void send_parachute_command();
+	// void send_parachute_command();
 
 	void checkForMissionUpdate();
 
