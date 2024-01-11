@@ -3,8 +3,8 @@
 {
 		"fields": "\u0089 timestamp;\u008a mag_inconsistency_angle;\u0086[4] _padding0;",
 		"fields_total_length": 70,
-		"orb_ids": [200],
-		"main_orb_id": 200,
+		"orb_ids": [201],
+		"main_orb_id": 201,
 		"dependencies": [],
 		"name": "px4/SensorPreflightMag"
 }

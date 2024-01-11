@@ -44,8 +44,8 @@
 #include "UserModeIntention.hpp"
 #include "worker_thread.hpp"
 
-#include <lib/controllib/blocks.hpp>
-#include <lib/hysteresis/hysteresis.h>
+// #include <lib/controllib/blocks.hpp>
+// #include <lib/hysteresis/hysteresis.h>
 #include <lib/mathlib/mathlib.h>
 #include <lib/perf/perf_counter.h>
 #include <px4_platform_common/module.h>
@@ -53,8 +53,8 @@
 
 // publications
 #include <uORB/Publication.hpp>
-#include <uORB/topics/actuator_armed.h>
-#include <uORB/topics/actuator_test.h>
+// #include <uORB/topics/actuator_armed.h>
+// #include <uORB/topics/actuator_test.h>
 #include <uORB/topics/failure_detector_status.h>
 #include <uORB/topics/vehicle_command_ack.h>
 #include <uORB/topics/vehicle_control_mode.h>
@@ -80,7 +80,7 @@
 #include <uORB/topics/vehicle_command.h>
 #include <uORB/topics/vehicle_global_position.h>
 #include <uORB/topics/vehicle_land_detected.h>
-#include <uORB/topics/vtol_vehicle_status.h>
+// #include <uORB/topics/vtol_vehicle_status.h>
 
 using math::constrain;
 using systemlib::Hysteresis;
@@ -140,9 +140,7 @@ private:
 	 */
 	void dataLinkCheck();
 
-	void manualControlCheck();
 
-	void offboardControlCheck();
 
 	/**
 	 * @brief Handle incoming vehicle command relavant to Commander
@@ -172,24 +170,11 @@ private:
 
 	void landDetectorUpdate();
 
-	void safetyButtonUpdate();
-
-	bool isThrowLaunchInProgress() const;
-
-	void throwLaunchUpdate();
-
-	void vtolStatusUpdate();
-
-	void updateTunes();
 
 	void checkWorkerThread();
 
 	bool getPrearmState() const;
-
-	void handleAutoDisarm();
-
-	bool handleModeIntentionAndFailsafe();
-
+	
 	void updateParameters();
 
 	void checkAndInformReadyForTakeoff();
@@ -308,7 +293,7 @@ private:
 
 	// Publications
 	uORB::Publication<actuator_armed_s>			_actuator_armed_pub{ORB_ID(actuator_armed)};
-	uORB::Publication<actuator_test_s>			_actuator_test_pub{ORB_ID(actuator_test)};
+	// uORB::Publication<actuator_test_s>			_actuator_test_pub{ORB_ID(actuator_test)};
 	uORB::Publication<failure_detector_status_s>		_failure_detector_status_pub{ORB_ID(failure_detector_status)};
 	uORB::Publication<vehicle_command_ack_s>		_vehicle_command_ack_pub{ORB_ID(vehicle_command_ack)};
 	uORB::Publication<vehicle_command_s>			_vehicle_command_pub{ORB_ID(vehicle_command)};

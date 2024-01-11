@@ -45,7 +45,9 @@
 #include <lib/mathlib/mathlib.h>
 
 static_assert(static_cast<orb_id_size_t>(ORB_ID::adc_report) == 11, "ORB_ID index mismatch");
-ORB_DEFINE(adc_report, struct adc_report_s, 92, 1709574844u, static_cast<orb_id_size_t>(ORB_ID::adc_report));
+ORB_DEFINE(adc_report, struct adc_report_s, 240, 454848687u, static_cast<orb_id_size_t>(ORB_ID::adc_report));
+static_assert(static_cast<orb_id_size_t>(ORB_ID::external_adc) == 89, "ORB_ID index mismatch");
+ORB_DEFINE(external_adc, struct adc_report_s, 240, 454848687u, static_cast<orb_id_size_t>(ORB_ID::external_adc));
 
 
 void print_message(const orb_metadata *meta, const adc_report_s& message)

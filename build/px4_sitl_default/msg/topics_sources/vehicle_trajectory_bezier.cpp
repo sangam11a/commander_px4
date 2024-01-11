@@ -44,7 +44,7 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_trajectory_bezier) == 260, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_trajectory_bezier) == 261, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_trajectory_bezier, struct vehicle_trajectory_bezier_s, 176, 4004146883u, static_cast<orb_id_size_t>(ORB_ID::vehicle_trajectory_bezier));
 
 

@@ -46,7 +46,7 @@
 
 static_assert(static_cast<orb_id_size_t>(ORB_ID::button_event) == 20, "ORB_ID index mismatch");
 ORB_DEFINE(button_event, struct button_event_s, 9, 1572394780u, static_cast<orb_id_size_t>(ORB_ID::button_event));
-static_assert(static_cast<orb_id_size_t>(ORB_ID::safety_button) == 185, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::safety_button) == 186, "ORB_ID index mismatch");
 ORB_DEFINE(safety_button, struct button_event_s, 9, 1572394780u, static_cast<orb_id_size_t>(ORB_ID::safety_button));
 
 

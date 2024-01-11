@@ -44,7 +44,7 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::px4io_status) == 174, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::px4io_status) == 175, "ORB_ID index mismatch");
 ORB_DEFINE(px4io_status, struct px4io_status_s, 141, 1239903294u, static_cast<orb_id_size_t>(ORB_ID::px4io_status));
 
 

@@ -23,3 +23,9 @@ uint8 gyro_clipping             # bitfield indicating if there was any gyro clip
 
 uint8 accel_calibration_count   # Calibration changed counter. Monotonically increases whenever accelermeter calibration changes.
 uint8 gyro_calibration_count    # Calibration changed counter. Monotonically increases whenever rate gyro calibration changes.
+
+#Added contents
+
+float32[3] magnetometer
+float32 temperature
+

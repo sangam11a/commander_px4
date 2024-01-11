@@ -1,9 +1,9 @@
 
 
 {
-		"fields": "\u0089 timestamp;\u0088 device_id;\u0084[12] raw_data;\u0088 resolution;\u008a v_ref;\u0083[12] channel_id;\u0086[4] _padding0;",
-		"fields_total_length": 135,
-		"orb_ids": [11],
+		"fields": "\u0089 timestamp;\u0088 device_id;\u0084[12] raw_data;\u0088 resolution;\u008a v_ref;\u008a v_ref_ext;\u008a[12] raw_data_ext1;\u008a[12] raw_data_ext2;\u0083[12] channel_id;\u0083[12] channel_id_ext1;\u0083[12] channel_id_ext2;",
+		"fields_total_length": 234,
+		"orb_ids": [11, 89],
 		"main_orb_id": 11,
 		"dependencies": [],
 		"name": "px4/AdcReport"

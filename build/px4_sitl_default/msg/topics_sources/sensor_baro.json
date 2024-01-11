@@ -3,8 +3,8 @@
 {
 		"fields": "\u0089 timestamp;\u0089 timestamp_sample;\u0088 device_id;\u008a pressure;\u008a temperature;\u0088 error_count;",
 		"fields_total_length": 118,
-		"orb_ids": [189],
-		"main_orb_id": 189,
+		"orb_ids": [190],
+		"main_orb_id": 190,
 		"dependencies": [],
 		"name": "px4/SensorBaro"
 }

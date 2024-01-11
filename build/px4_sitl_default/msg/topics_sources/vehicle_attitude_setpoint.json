@@ -3,8 +3,8 @@
 {
 		"fields": "\u0089 timestamp;\u008a roll_body;\u008a pitch_body;\u008a yaw_body;\u008a yaw_sp_move_rate;\u008a[4] q_d;\u008a[3] thrust_body;\u008c reset_integral;\u008c fw_control_yaw_wheel;\u0086[2] _padding0;",
 		"fields_total_length": 191,
-		"orb_ids": [231, 142, 99],
-		"main_orb_id": 231,
+		"orb_ids": [232, 143, 100],
+		"main_orb_id": 232,
 		"dependencies": [],
 		"name": "px4/VehicleAttitudeSetpoint"
 }

@@ -44,11 +44,11 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_local_position) == 243, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_local_position) == 244, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_local_position, struct vehicle_local_position_s, 171, 372537799u, static_cast<orb_id_size_t>(ORB_ID::vehicle_local_position));
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_local_position_groundtruth) == 244, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_local_position_groundtruth) == 245, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_local_position_groundtruth, struct vehicle_local_position_s, 171, 372537799u, static_cast<orb_id_size_t>(ORB_ID::vehicle_local_position_groundtruth));
-static_assert(static_cast<orb_id_size_t>(ORB_ID::external_ins_local_position) == 91, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::external_ins_local_position) == 92, "ORB_ID index mismatch");
 ORB_DEFINE(external_ins_local_position, struct vehicle_local_position_s, 171, 372537799u, static_cast<orb_id_size_t>(ORB_ID::external_ins_local_position));
 static_assert(static_cast<orb_id_size_t>(ORB_ID::estimator_local_position) == 78, "ORB_ID index mismatch");
 ORB_DEFINE(estimator_local_position, struct vehicle_local_position_s, 171, 372537799u, static_cast<orb_id_size_t>(ORB_ID::estimator_local_position));

@@ -3,8 +3,8 @@
 {
 		"fields": "\u0089 timestamp;\u0086 launch_detection_state;\u0086[7] _padding0;",
 		"fields_total_length": 71,
-		"orb_ids": [131],
-		"main_orb_id": 131,
+		"orb_ids": [132],
+		"main_orb_id": 132,
 		"dependencies": [],
 		"name": "px4/LaunchDetectionStatus"
 }

@@ -3,8 +3,8 @@
 {
 		"fields": "\u0089 timestamp;\u008a[3] attitude_euler_angle;\u0086[4] _padding0;",
 		"fields_total_length": 70,
-		"orb_ids": [148],
-		"main_orb_id": 148,
+		"orb_ids": [149],
+		"main_orb_id": 149,
 		"dependencies": [],
 		"name": "px4/MountOrientation"
 }

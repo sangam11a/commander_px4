@@ -3,8 +3,8 @@
 {
 		"fields": "\u0089 timestamp;\u008a indicated_frequency_rpm;\u008a estimated_accurancy_rpm;",
 		"fields_total_length": 79,
-		"orb_ids": [183],
-		"main_orb_id": 183,
+		"orb_ids": [184],
+		"main_orb_id": 184,
 		"dependencies": [],
 		"name": "px4/Rpm"
 }

@@ -44,11 +44,11 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_attitude) == 229, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_attitude) == 230, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_attitude, struct vehicle_attitude_s, 49, 180484045u, static_cast<orb_id_size_t>(ORB_ID::vehicle_attitude));
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_attitude_groundtruth) == 230, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_attitude_groundtruth) == 231, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_attitude_groundtruth, struct vehicle_attitude_s, 49, 180484045u, static_cast<orb_id_size_t>(ORB_ID::vehicle_attitude_groundtruth));
-static_assert(static_cast<orb_id_size_t>(ORB_ID::external_ins_attitude) == 89, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::external_ins_attitude) == 90, "ORB_ID index mismatch");
 ORB_DEFINE(external_ins_attitude, struct vehicle_attitude_s, 49, 180484045u, static_cast<orb_id_size_t>(ORB_ID::external_ins_attitude));
 static_assert(static_cast<orb_id_size_t>(ORB_ID::estimator_attitude) == 67, "ORB_ID index mismatch");
 ORB_DEFINE(estimator_attitude, struct vehicle_attitude_s, 49, 180484045u, static_cast<orb_id_size_t>(ORB_ID::estimator_attitude));

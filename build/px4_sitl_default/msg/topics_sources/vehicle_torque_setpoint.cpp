@@ -44,11 +44,11 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_torque_setpoint) == 257, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_torque_setpoint) == 258, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_torque_setpoint, struct vehicle_torque_setpoint_s, 28, 1728613989u, static_cast<orb_id_size_t>(ORB_ID::vehicle_torque_setpoint));
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_torque_setpoint_virtual_fw) == 258, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_torque_setpoint_virtual_fw) == 259, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_torque_setpoint_virtual_fw, struct vehicle_torque_setpoint_s, 28, 1728613989u, static_cast<orb_id_size_t>(ORB_ID::vehicle_torque_setpoint_virtual_fw));
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_torque_setpoint_virtual_mc) == 259, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_torque_setpoint_virtual_mc) == 260, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_torque_setpoint_virtual_mc, struct vehicle_torque_setpoint_s, 28, 1728613989u, static_cast<orb_id_size_t>(ORB_ID::vehicle_torque_setpoint_virtual_mc));
 
 

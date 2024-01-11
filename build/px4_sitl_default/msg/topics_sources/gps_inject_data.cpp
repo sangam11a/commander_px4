@@ -44,7 +44,7 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::gps_inject_data) == 117, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::gps_inject_data) == 118, "ORB_ID index mismatch");
 ORB_DEFINE(gps_inject_data, struct gps_inject_data_s, 315, 4081162988u, static_cast<orb_id_size_t>(ORB_ID::gps_inject_data));
 
 

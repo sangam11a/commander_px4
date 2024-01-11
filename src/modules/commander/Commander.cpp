@@ -62,6 +62,11 @@
 #include <px4_platform_common/time.h>
 #include <systemlib/mavlink_log.h>
 
+/*PX4 topics*/
+#include <uORB/topics/sensor_combined.h>
+#include <uORB/topics/vehicle_magnetometer.h>
+
+
 #include <math.h>
 #include <float.h>
 #include <cstring>
@@ -174,6 +179,58 @@ int Commander::custom_command(int argc, char *argv[])
 	}
 
 #ifndef CONSTRAINED_FLASH
+
+	if(!strcmp(argv[0], "hk")){
+		struct sensor_combined_s set_data;
+		memset(&set_data,0,sizeof(set_data));
+		uORB::SubscriptionData<sensor_combined_s> sensor_combined_data{ORB_ID(sensor_combined)};
+
+		orb_advert_t data_pub = orb_advertise(ORB_ID(sensor_combined), &set_data);
+		uORB::SubscriptionData<vehicle_magnetometer_s> magnetometer_data{ORB_ID(vehicle_magnetometer)};
+		uORB::SubscriptionData<sensor_accel_s> temperature_data{ORB_ID(sensor_accel)};
+		// orb_copy(ORB_ID(sensor_combined), sensor_combined_data, &set_data);
+		set_data.temperature = (double)temperature_data.get().temperature;
+		set_data.magnetometer[0] = (double)magnetometer_data.get().magnetometer_ga[0] ;
+		set_data.magnetometer[1] = (double)magnetometer_data.get().magnetometer_ga[1] ;
+		set_data.magnetometer[2] = (double)magnetometer_data.get().magnetometer_ga[2] ;
+
+		set_data.gyro_rad[0] = sensor_combined_data.get().gyro_rad[0];
+		set_data.gyro_rad[1] = sensor_combined_data.get().gyro_rad[1];
+		set_data.gyro_rad[2] = sensor_combined_data.get().gyro_rad[2];
+
+		set_data.accelerometer_m_s2[0] = sensor_combined_data.get().accelerometer_m_s2[0];
+		set_data.accelerometer_m_s2[1] = sensor_combined_data.get().accelerometer_m_s2[1];
+		set_data.accelerometer_m_s2[2] = sensor_combined_data.get().accelerometer_m_s2[2];
+
+
+		// PX4_INFO("temperature : %f",(double)temperature_data.get().temperature);
+		// PX4_INFO("magnetometer x: %f",(double)magnetometer_data.get().magnetometer_ga[0]);
+		// PX4_INFO("magnetometer y: %f",(double)magnetometer_data.get().magnetometer_ga[1]);
+		// PX4_INFO("magnetometer z: %f",(double)magnetometer_data.get().magnetometer_ga[2]);
+		// PX4_INFO("gyro 0 :  %f",(double)sensor_combined_data.get().gyro_rad[0]); //
+		// PX4_INFO("gyro 1 :  %f",(double)sensor_combined_data.get().gyro_rad[1]);
+		// PX4_INFO("gyro 2 :  %f",(double)sensor_combined_data.get().gyro_rad[2]);
+		// PX4_INFO("accel 0:  %f",(double)sensor_combined_data.get().accelerometer_m_s2[0]);
+		// PX4_INFO("accel 1:  %f",(double)sensor_combined_data.get().accelerometer_m_s2[1]);
+		// PX4_INFO("accel 2:  %f",(double)sensor_combined_data.get().accelerometer_m_s2[2]);
+
+		if(orb_publish(ORB_ID(sensor_combined), data_pub, &set_data)){
+			PX4_INFO("Hey the data has been published");
+		}
+
+		uORB::SubscriptionData<sensor_combined_s> sensor_combined_data2{ORB_ID(sensor_combined)};
+		PX4_INFO("\nTemperature : %f",(double)sensor_combined_data2.get().temperature);
+		PX4_INFO("magnetometer x: %f",(double)sensor_combined_data2.get().magnetometer[0]);
+		PX4_INFO("magnetometer y: %f",(double)sensor_combined_data2.get().magnetometer[1]);
+		PX4_INFO("magnetometer z: %f",(double)sensor_combined_data2.get().magnetometer[2]);
+		PX4_INFO("gyro x :  %f",(double)sensor_combined_data2.get().gyro_rad[0]); //
+		PX4_INFO("gyro y :  %f",(double)sensor_combined_data2.get().gyro_rad[1]);
+		PX4_INFO("gyro z :  %f",(double)sensor_combined_data2.get().gyro_rad[2]);
+		PX4_INFO("accel x:  %f",(double)sensor_combined_data2.get().accelerometer_m_s2[0]);
+		PX4_INFO("accel y:  %f",(double)sensor_combined_data2.get().accelerometer_m_s2[1]);
+		PX4_INFO("accel z:  %f",(double)sensor_combined_data2.get().accelerometer_m_s2[2]);
+		return 0;
+	}
 
 	if (!strcmp(argv[0], "calibrate")) {
 		if (argc > 1) {
@@ -747,9 +804,9 @@ Commander::handle_command(const vehicle_command_s &cmd)
 		break;
 
 
-	case vehicle_command_s::VEHICLE_CMD_ACTUATOR_TEST:
-		cmd_result = handleCommandActuatorTest(cmd);
-		break;
+	// case vehicle_command_s::VEHICLE_CMD_ACTUATOR_TEST:
+	// 	cmd_result = handleCommandActuatorTest(cmd);
+	// 	break;
 
 
 	case vehicle_command_s::VEHICLE_CMD_PREFLIGHT_CALIBRATION: {
@@ -1054,60 +1111,60 @@ void Commander::handleCommandsFromModeExecutors()
 	}
 }
 
-unsigned Commander::handleCommandActuatorTest(const vehicle_command_s &cmd)
-{
-	if (isArmed() || (_safety.isButtonAvailable() && !_safety.isSafetyOff())) {
-		return vehicle_command_ack_s::VEHICLE_CMD_RESULT_DENIED;
-	}
+// unsigned Commander::handleCommandActuatorTest(const vehicle_command_s &cmd)
+// {
+// 	if (isArmed() || (_safety.isButtonAvailable() && !_safety.isSafetyOff())) {
+// 		return vehicle_command_ack_s::VEHICLE_CMD_RESULT_DENIED;
+// 	}
 
-	if (_param_com_mot_test_en.get() != 1) {
-		return vehicle_command_ack_s::VEHICLE_CMD_RESULT_DENIED;
-	}
+// 	if (_param_com_mot_test_en.get() != 1) {
+// 		return vehicle_command_ack_s::VEHICLE_CMD_RESULT_DENIED;
+// 	}
 
-	actuator_test_s actuator_test{};
-	actuator_test.timestamp = hrt_absolute_time();
-	actuator_test.function = (int)(cmd.param5 + 0.5);
+// 	actuator_test_s actuator_test{};
+// 	actuator_test.timestamp = hrt_absolute_time();
+// 	actuator_test.function = (int)(cmd.param5 + 0.5);
 
-	if (actuator_test.function < 1000) {
-		const int first_motor_function = 1; // from MAVLink ACTUATOR_OUTPUT_FUNCTION
-		const int first_servo_function = 33;
+// 	if (actuator_test.function < 1000) {
+// 		const int first_motor_function = 1; // from MAVLink ACTUATOR_OUTPUT_FUNCTION
+// 		const int first_servo_function = 33;
 
-		if (actuator_test.function >= first_motor_function
-		    && actuator_test.function < first_motor_function + actuator_test_s::MAX_NUM_MOTORS) {
-			actuator_test.function = actuator_test.function - first_motor_function + actuator_test_s::FUNCTION_MOTOR1;
+// 		if (actuator_test.function >= first_motor_function
+// 		    && actuator_test.function < first_motor_function + actuator_test_s::MAX_NUM_MOTORS) {
+// 			actuator_test.function = actuator_test.function - first_motor_function + actuator_test_s::FUNCTION_MOTOR1;
 
-		} else if (actuator_test.function >= first_servo_function
-			   && actuator_test.function < first_servo_function + actuator_test_s::MAX_NUM_SERVOS) {
-			actuator_test.function = actuator_test.function - first_servo_function + actuator_test_s::FUNCTION_SERVO1;
+// 		} else if (actuator_test.function >= first_servo_function
+// 			   && actuator_test.function < first_servo_function + actuator_test_s::MAX_NUM_SERVOS) {
+// 			actuator_test.function = actuator_test.function - first_servo_function + actuator_test_s::FUNCTION_SERVO1;
 
-		} else {
-			return vehicle_command_ack_s::VEHICLE_CMD_RESULT_UNSUPPORTED;
-		}
+// 		} else {
+// 			return vehicle_command_ack_s::VEHICLE_CMD_RESULT_UNSUPPORTED;
+// 		}
 
-	} else {
-		actuator_test.function -= 1000;
-	}
+// 	} else {
+// 		actuator_test.function -= 1000;
+// 	}
 
-	actuator_test.value = cmd.param1;
+// 	actuator_test.value = cmd.param1;
 
-	actuator_test.action = actuator_test_s::ACTION_DO_CONTROL;
-	int timeout_ms = (int)(cmd.param2 * 1000.f + 0.5f);
+// 	actuator_test.action = actuator_test_s::ACTION_DO_CONTROL;
+// 	int timeout_ms = (int)(cmd.param2 * 1000.f + 0.5f);
 
-	if (timeout_ms <= 0) {
-		actuator_test.action = actuator_test_s::ACTION_RELEASE_CONTROL;
+// 	if (timeout_ms <= 0) {
+// 		actuator_test.action = actuator_test_s::ACTION_RELEASE_CONTROL;
 
-	} else {
-		actuator_test.timeout_ms = timeout_ms;
-	}
+// 	} else {
+// 		actuator_test.timeout_ms = timeout_ms;
+// 	}
 
-	// enforce a timeout and a maximum limit
-	if (actuator_test.timeout_ms == 0 || actuator_test.timeout_ms > 3000) {
-		actuator_test.timeout_ms = 3000;
-	}
+// 	// enforce a timeout and a maximum limit
+// 	if (actuator_test.timeout_ms == 0 || actuator_test.timeout_ms > 3000) {
+// 		actuator_test.timeout_ms = 3000;
+// 	}
 
-	_actuator_test_pub.publish(actuator_test);
-	return vehicle_command_ack_s::VEHICLE_CMD_RESULT_ACCEPTED;
-}
+// 	_actuator_test_pub.publish(actuator_test);
+// 	return vehicle_command_ack_s::VEHICLE_CMD_RESULT_ACCEPTED;
+// }
 
 
 

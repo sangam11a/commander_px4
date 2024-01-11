@@ -44,8 +44,8 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::sensor_combined) == 190, "ORB_ID index mismatch");
-ORB_DEFINE(sensor_combined, struct sensor_combined_s, 48, 3227736561u, static_cast<orb_id_size_t>(ORB_ID::sensor_combined));
+static_assert(static_cast<orb_id_size_t>(ORB_ID::sensor_combined) == 191, "ORB_ID index mismatch");
+ORB_DEFINE(sensor_combined, struct sensor_combined_s, 64, 3911131442u, static_cast<orb_id_size_t>(ORB_ID::sensor_combined));
 
 
 void print_message(const orb_metadata *meta, const sensor_combined_s& message)

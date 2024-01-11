@@ -44,7 +44,7 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::yaw_estimator_status) == 268, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::yaw_estimator_status) == 269, "ORB_ID index mismatch");
 ORB_DEFINE(yaw_estimator_status, struct yaw_estimator_status_s, 105, 3686949170u, static_cast<orb_id_size_t>(ORB_ID::yaw_estimator_status));
 
 

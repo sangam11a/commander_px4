@@ -328,6 +328,7 @@ const constexpr struct orb_metadata *const uorb_topics_list[ORB_TOPICS_COUNT] = 
 	ORB_ID(estimator_status_flags), 
 	ORB_ID(estimator_wind), 
 	ORB_ID(event), 
+	ORB_ID(external_adc), 
 	ORB_ID(external_ins_attitude), 
 	ORB_ID(external_ins_global_position), 
 	ORB_ID(external_ins_local_position), 

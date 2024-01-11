@@ -3,8 +3,8 @@
 {
 		"fields": "\u0089 timestamp;\u0086 event;\u0086[7] _padding0;",
 		"fields_total_length": 54,
-		"orb_ids": [170],
-		"main_orb_id": 170,
+		"orb_ids": [171],
+		"main_orb_id": 171,
 		"dependencies": [],
 		"name": "px4/PowerButtonState"
 }

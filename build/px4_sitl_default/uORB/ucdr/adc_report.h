@@ -43,7 +43,7 @@
 
 static inline constexpr int ucdr_topic_size_adc_report()
 {
-	return 92;
+	return 240;
 }
 
 static inline bool ucdr_serialize_adc_report(const void* data, ucdrBuffer& buf, int64_t time_offset = 0)
@@ -74,6 +74,26 @@ static inline bool ucdr_serialize_adc_report(const void* data, ucdrBuffer& buf, 
 	memcpy(buf.iterator, &topic.v_ref, sizeof(topic.v_ref));
 	buf.iterator += sizeof(topic.v_ref);
 	buf.offset += sizeof(topic.v_ref);
+	static_assert(sizeof(topic.v_ref_ext) == 4, "size mismatch");
+	memcpy(buf.iterator, &topic.v_ref_ext, sizeof(topic.v_ref_ext));
+	buf.iterator += sizeof(topic.v_ref_ext);
+	buf.offset += sizeof(topic.v_ref_ext);
+	static_assert(sizeof(topic.channel_id_ext1) == 24, "size mismatch");
+	memcpy(buf.iterator, &topic.channel_id_ext1, sizeof(topic.channel_id_ext1));
+	buf.iterator += sizeof(topic.channel_id_ext1);
+	buf.offset += sizeof(topic.channel_id_ext1);
+	static_assert(sizeof(topic.channel_id_ext2) == 24, "size mismatch");
+	memcpy(buf.iterator, &topic.channel_id_ext2, sizeof(topic.channel_id_ext2));
+	buf.iterator += sizeof(topic.channel_id_ext2);
+	buf.offset += sizeof(topic.channel_id_ext2);
+	static_assert(sizeof(topic.raw_data_ext1) == 48, "size mismatch");
+	memcpy(buf.iterator, &topic.raw_data_ext1, sizeof(topic.raw_data_ext1));
+	buf.iterator += sizeof(topic.raw_data_ext1);
+	buf.offset += sizeof(topic.raw_data_ext1);
+	static_assert(sizeof(topic.raw_data_ext2) == 48, "size mismatch");
+	memcpy(buf.iterator, &topic.raw_data_ext2, sizeof(topic.raw_data_ext2));
+	buf.iterator += sizeof(topic.raw_data_ext2);
+	buf.offset += sizeof(topic.raw_data_ext2);
 	return true;
 }
 
@@ -105,5 +125,25 @@ static inline bool ucdr_deserialize_adc_report(ucdrBuffer& buf, adc_report_s& to
 	memcpy(&topic.v_ref, buf.iterator, sizeof(topic.v_ref));
 	buf.iterator += sizeof(topic.v_ref);
 	buf.offset += sizeof(topic.v_ref);
+	static_assert(sizeof(topic.v_ref_ext) == 4, "size mismatch");
+	memcpy(&topic.v_ref_ext, buf.iterator, sizeof(topic.v_ref_ext));
+	buf.iterator += sizeof(topic.v_ref_ext);
+	buf.offset += sizeof(topic.v_ref_ext);
+	static_assert(sizeof(topic.channel_id_ext1) == 24, "size mismatch");
+	memcpy(&topic.channel_id_ext1, buf.iterator, sizeof(topic.channel_id_ext1));
+	buf.iterator += sizeof(topic.channel_id_ext1);
+	buf.offset += sizeof(topic.channel_id_ext1);
+	static_assert(sizeof(topic.channel_id_ext2) == 24, "size mismatch");
+	memcpy(&topic.channel_id_ext2, buf.iterator, sizeof(topic.channel_id_ext2));
+	buf.iterator += sizeof(topic.channel_id_ext2);
+	buf.offset += sizeof(topic.channel_id_ext2);
+	static_assert(sizeof(topic.raw_data_ext1) == 48, "size mismatch");
+	memcpy(&topic.raw_data_ext1, buf.iterator, sizeof(topic.raw_data_ext1));
+	buf.iterator += sizeof(topic.raw_data_ext1);
+	buf.offset += sizeof(topic.raw_data_ext1);
+	static_assert(sizeof(topic.raw_data_ext2) == 48, "size mismatch");
+	memcpy(&topic.raw_data_ext2, buf.iterator, sizeof(topic.raw_data_ext2));
+	buf.iterator += sizeof(topic.raw_data_ext2);
+	buf.offset += sizeof(topic.raw_data_ext2);
 	return true;
 }

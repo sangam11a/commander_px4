@@ -60,6 +60,8 @@ struct sensor_combined_s {
 	int32_t accelerometer_timestamp_relative;
 	float accelerometer_m_s2[3];
 	uint32_t accelerometer_integral_dt;
+	float magnetometer[3];
+	float temperature;
 	uint8_t accelerometer_clipping;
 	uint8_t gyro_clipping;
 	uint8_t accel_calibration_count;

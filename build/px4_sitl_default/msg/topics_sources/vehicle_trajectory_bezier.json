@@ -3,8 +3,8 @@
 {
 		"fields": "\u0089 timestamp;\u0086 bezier_order;\u0086[7] _padding0;trajectory_bezier[5] control_points;",
 		"fields_total_length": 97,
-		"orb_ids": [260],
-		"main_orb_id": 260,
+		"orb_ids": [261],
+		"main_orb_id": 261,
 		"dependencies": ["px4/TrajectoryBezier"],
 		"name": "px4/VehicleTrajectoryBezier"
 }

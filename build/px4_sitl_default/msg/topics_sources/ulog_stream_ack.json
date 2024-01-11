@@ -3,8 +3,8 @@
 {
 		"fields": "\u0089 timestamp;\u0087 msg_sequence;\u0086[6] _padding0;",
 		"fields_total_length": 62,
-		"orb_ids": [222],
-		"main_orb_id": 222,
+		"orb_ids": [223],
+		"main_orb_id": 223,
 		"dependencies": [],
 		"name": "px4/UlogStreamAck"
 }

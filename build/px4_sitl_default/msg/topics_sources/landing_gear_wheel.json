@@ -3,8 +3,8 @@
 {
 		"fields": "\u0089 timestamp;\u008a normalized_wheel_setpoint;\u0086[4] _padding0;",
 		"fields_total_length": 72,
-		"orb_ids": [128],
-		"main_orb_id": 128,
+		"orb_ids": [129],
+		"main_orb_id": 129,
 		"dependencies": [],
 		"name": "px4/LandingGearWheel"
 }

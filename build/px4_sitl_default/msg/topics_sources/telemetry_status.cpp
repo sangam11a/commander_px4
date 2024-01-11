@@ -44,7 +44,7 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::telemetry_status) == 211, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::telemetry_status) == 212, "ORB_ID index mismatch");
 ORB_DEFINE(telemetry_status, struct telemetry_status_s, 86, 1132483312u, static_cast<orb_id_size_t>(ORB_ID::telemetry_status));
 
 

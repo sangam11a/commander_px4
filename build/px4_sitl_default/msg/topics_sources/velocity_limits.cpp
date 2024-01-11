@@ -44,7 +44,7 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::velocity_limits) == 264, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::velocity_limits) == 265, "ORB_ID index mismatch");
 ORB_DEFINE(velocity_limits, struct velocity_limits_s, 20, 2162289444u, static_cast<orb_id_size_t>(ORB_ID::velocity_limits));
 
 

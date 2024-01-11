@@ -43,7 +43,7 @@
 
 static inline constexpr int ucdr_topic_size_sensor_combined()
 {
-	return 48;
+	return 64;
 }
 
 static inline bool ucdr_serialize_sensor_combined(const void* data, ucdrBuffer& buf, int64_t time_offset = 0)
@@ -90,6 +90,14 @@ static inline bool ucdr_serialize_sensor_combined(const void* data, ucdrBuffer& 
 	memcpy(buf.iterator, &topic.gyro_calibration_count, sizeof(topic.gyro_calibration_count));
 	buf.iterator += sizeof(topic.gyro_calibration_count);
 	buf.offset += sizeof(topic.gyro_calibration_count);
+	static_assert(sizeof(topic.magnetometer) == 12, "size mismatch");
+	memcpy(buf.iterator, &topic.magnetometer, sizeof(topic.magnetometer));
+	buf.iterator += sizeof(topic.magnetometer);
+	buf.offset += sizeof(topic.magnetometer);
+	static_assert(sizeof(topic.temperature) == 4, "size mismatch");
+	memcpy(buf.iterator, &topic.temperature, sizeof(topic.temperature));
+	buf.iterator += sizeof(topic.temperature);
+	buf.offset += sizeof(topic.temperature);
 	return true;
 }
 
@@ -137,5 +145,13 @@ static inline bool ucdr_deserialize_sensor_combined(ucdrBuffer& buf, sensor_comb
 	memcpy(&topic.gyro_calibration_count, buf.iterator, sizeof(topic.gyro_calibration_count));
 	buf.iterator += sizeof(topic.gyro_calibration_count);
 	buf.offset += sizeof(topic.gyro_calibration_count);
+	static_assert(sizeof(topic.magnetometer) == 12, "size mismatch");
+	memcpy(&topic.magnetometer, buf.iterator, sizeof(topic.magnetometer));
+	buf.iterator += sizeof(topic.magnetometer);
+	buf.offset += sizeof(topic.magnetometer);
+	static_assert(sizeof(topic.temperature) == 4, "size mismatch");
+	memcpy(&topic.temperature, buf.iterator, sizeof(topic.temperature));
+	buf.iterator += sizeof(topic.temperature);
+	buf.offset += sizeof(topic.temperature);
 	return true;
 }

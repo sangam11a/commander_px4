@@ -44,9 +44,9 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_trajectory_waypoint) == 261, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_trajectory_waypoint) == 262, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_trajectory_waypoint, struct vehicle_trajectory_waypoint_s, 296, 3511886583u, static_cast<orb_id_size_t>(ORB_ID::vehicle_trajectory_waypoint));
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_trajectory_waypoint_desired) == 262, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_trajectory_waypoint_desired) == 263, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_trajectory_waypoint_desired, struct vehicle_trajectory_waypoint_s, 296, 3511886583u, static_cast<orb_id_size_t>(ORB_ID::vehicle_trajectory_waypoint_desired));
 
 

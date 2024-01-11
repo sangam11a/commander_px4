@@ -44,7 +44,7 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::hover_thrust_estimate) == 122, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::hover_thrust_estimate) == 123, "ORB_ID index mismatch");
 ORB_DEFINE(hover_thrust_estimate, struct hover_thrust_estimate_s, 41, 1927353777u, static_cast<orb_id_size_t>(ORB_ID::hover_thrust_estimate));
 
 

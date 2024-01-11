@@ -44,9 +44,9 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::manual_control_setpoint) == 138, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::manual_control_setpoint) == 139, "ORB_ID index mismatch");
 ORB_DEFINE(manual_control_setpoint, struct manual_control_setpoint_s, 63, 536801218u, static_cast<orb_id_size_t>(ORB_ID::manual_control_setpoint));
-static_assert(static_cast<orb_id_size_t>(ORB_ID::manual_control_input) == 137, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::manual_control_input) == 138, "ORB_ID index mismatch");
 ORB_DEFINE(manual_control_input, struct manual_control_setpoint_s, 63, 536801218u, static_cast<orb_id_size_t>(ORB_ID::manual_control_input));
 
 

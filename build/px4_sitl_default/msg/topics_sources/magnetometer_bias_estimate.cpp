@@ -44,7 +44,7 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::magnetometer_bias_estimate) == 136, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::magnetometer_bias_estimate) == 137, "ORB_ID index mismatch");
 ORB_DEFINE(magnetometer_bias_estimate, struct magnetometer_bias_estimate_s, 64, 2906350682u, static_cast<orb_id_size_t>(ORB_ID::magnetometer_bias_estimate));
 
 

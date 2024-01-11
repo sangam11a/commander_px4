@@ -55,8 +55,12 @@ struct adc_report_s {
 	int32_t raw_data[12];
 	uint32_t resolution;
 	float v_ref;
+	float v_ref_ext;
+	float raw_data_ext1[12];
+	float raw_data_ext2[12];
 	int16_t channel_id[12];
-	uint8_t _padding0[4]; // required for logger
+	int16_t channel_id_ext1[12];
+	int16_t channel_id_ext2[12];
 
 
 #ifdef __cplusplus
@@ -74,6 +78,7 @@ namespace px4 {
 
 /* register this as object request broker structure */
 ORB_DECLARE(adc_report);
+ORB_DECLARE(external_adc);
 
 
 #ifdef __cplusplus

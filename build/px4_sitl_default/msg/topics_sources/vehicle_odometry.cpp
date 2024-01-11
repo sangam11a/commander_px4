@@ -44,11 +44,11 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_odometry) == 248, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_odometry) == 249, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_odometry, struct vehicle_odometry_s, 108, 988836982u, static_cast<orb_id_size_t>(ORB_ID::vehicle_odometry));
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_mocap_odometry) == 247, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_mocap_odometry) == 248, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_mocap_odometry, struct vehicle_odometry_s, 108, 988836982u, static_cast<orb_id_size_t>(ORB_ID::vehicle_mocap_odometry));
-static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_visual_odometry) == 263, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::vehicle_visual_odometry) == 264, "ORB_ID index mismatch");
 ORB_DEFINE(vehicle_visual_odometry, struct vehicle_odometry_s, 108, 988836982u, static_cast<orb_id_size_t>(ORB_ID::vehicle_visual_odometry));
 static_assert(static_cast<orb_id_size_t>(ORB_ID::estimator_odometry) == 79, "ORB_ID index mismatch");
 ORB_DEFINE(estimator_odometry, struct vehicle_odometry_s, 108, 988836982u, static_cast<orb_id_size_t>(ORB_ID::estimator_odometry));

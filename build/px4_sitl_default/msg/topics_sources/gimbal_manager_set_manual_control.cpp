@@ -44,7 +44,7 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::gimbal_manager_set_manual_control) == 108, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::gimbal_manager_set_manual_control) == 109, "ORB_ID index mismatch");
 ORB_DEFINE(gimbal_manager_set_manual_control, struct gimbal_manager_set_manual_control_s, 33, 92255042u, static_cast<orb_id_size_t>(ORB_ID::gimbal_manager_set_manual_control));
 
 

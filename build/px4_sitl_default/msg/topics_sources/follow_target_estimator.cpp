@@ -44,7 +44,7 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::follow_target_estimator) == 97, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::follow_target_estimator) == 98, "ORB_ID index mismatch");
 ORB_DEFINE(follow_target_estimator, struct follow_target_estimator_s, 90, 3388490069u, static_cast<orb_id_size_t>(ORB_ID::follow_target_estimator));
 
 

@@ -44,7 +44,7 @@
 #include <lib/matrix/matrix/math.hpp>
 #include <lib/mathlib/mathlib.h>
 
-static_assert(static_cast<orb_id_size_t>(ORB_ID::mount_orientation) == 148, "ORB_ID index mismatch");
+static_assert(static_cast<orb_id_size_t>(ORB_ID::mount_orientation) == 149, "ORB_ID index mismatch");
 ORB_DEFINE(mount_orientation, struct mount_orientation_s, 20, 3584440165u, static_cast<orb_id_size_t>(ORB_ID::mount_orientation));
 
 

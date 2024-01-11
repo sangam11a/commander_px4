@@ -3,8 +3,8 @@
 {
 		"fields": "\u0089 timestamp;\u0089 timestamp_sample;\u008a[3] xyz;\u0086[4] _padding0;",
 		"fields_total_length": 79,
-		"orb_ids": [224],
-		"main_orb_id": 224,
+		"orb_ids": [225],
+		"main_orb_id": 225,
 		"dependencies": [],
 		"name": "px4/VehicleAcceleration"
 }
