@@ -3,9 +3,9 @@
 /* Do not edit! */
 #pragma once
 
-#define PX4_GIT_VERSION_STR "711857dfaaf4a53831954e15a1bbc66c63df20b8"
-#define PX4_GIT_VERSION_BINARY 0x711857dfaaf4a538
-#define PX4_GIT_TAG_STR "v1.15.0-alpha1-398-g711857dfaa"
+#define PX4_GIT_VERSION_STR "fa4c3292b4f02a30c2b8eb77bd8eb33151c7553f"
+#define PX4_GIT_VERSION_BINARY 0xfa4c3292b4f02a30
+#define PX4_GIT_TAG_STR "v1.15.0-alpha1-399-gfa4c3292b4-dirty"
 #define PX4_GIT_BRANCH_NAME "jan-11"
 
 #define PX4_GIT_OEM_VERSION_STR  ""

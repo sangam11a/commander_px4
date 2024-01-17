@@ -34,14 +34,14 @@
 #pragma once
 
 /*   Helper classes  */
-#include "failsafe/failsafe.h"
+// #include "failsafe/failsafe.h"
 #include "failure_detector/FailureDetector.hpp"
 // #include "HealthAndArmingChecks/HealthAndArmingChecks.hpp"
-#include "HomePosition.hpp"
-#include "ModeManagement.hpp"
-#include "MulticopterThrowLaunch/MulticopterThrowLaunch.hpp"
-#include "Safety.hpp"
-#include "UserModeIntention.hpp"
+// #include "HomePosition.hpp"
+// #include "ModeManagement.hpp"
+// #include "MulticopterThrowLaunch/MulticopterThrowLaunch.hpp"
+// #include "Safety.hpp"
+// #include "UserModeIntention.hpp"
 #include "worker_thread.hpp"
 
 // #include <lib/controllib/blocks.hpp>
@@ -91,7 +91,7 @@ typedef enum {
 	TRANSITION_CHANGED
 } transition_result_t;
 
-using arm_disarm_reason_t = events::px4::enums::arm_disarm_reason_t;
+// using arm_disarm_reason_t = events::px4::enums::arm_disarm_reason_t;
 
 using namespace time_literals;
 
@@ -123,13 +123,13 @@ public:
 
 private:
 	bool isArmed() const { return (_vehicle_status.arming_state == vehicle_status_s::ARMING_STATE_ARMED); }
-	static ModeChangeSource getSourceFromCommand(const vehicle_command_s &cmd);
+	// static ModeChangeSource getSourceFromCommand(const vehicle_command_s &cmd);
 
 	void answer_command(const vehicle_command_s &cmd, uint8_t result);
 
-	transition_result_t arm(arm_disarm_reason_t calling_reason, bool run_preflight_checks = true);
+	// transition_result_t arm(arm_disarm_reason_t calling_reason, bool run_preflight_checks = true);
 
-	transition_result_t disarm(arm_disarm_reason_t calling_reason, bool forced = false);
+	// transition_result_t disarm(arm_disarm_reason_t calling_reason, bool forced = false);
 
 	// void battery_status_check();
 
@@ -174,7 +174,7 @@ private:
 	void checkWorkerThread();
 
 	bool getPrearmState() const;
-	
+
 	void updateParameters();
 
 	void checkAndInformReadyForTakeoff();
@@ -185,7 +185,7 @@ private:
 
 	enum class PrearmedMode {
 		DISABLED = 0,
-		SAFETY_BUTTON = 1,
+		// SAFETY_BUTTON = 1,
 		ALWAYS = 2
 	};
 
@@ -199,23 +199,23 @@ private:
 
 	vehicle_status_s        _vehicle_status{};
 
-	Failsafe		_failsafe_instance{this};
-	FailsafeBase		&_failsafe{_failsafe_instance};
+	// Failsafe		_failsafe_instance{this};
+	// FailsafeBase		&_failsafe{_failsafe_instance};
 	FailureDetector		_failure_detector{this};
-	HealthAndArmingChecks	_health_and_arming_checks{this, _vehicle_status};
-	MulticopterThrowLaunch  _multicopter_throw_launch{this};
-	Safety			_safety{};
+	// HealthAndArmingChecks	_health_and_arming_checks{this, _vehicle_status};
+	// MulticopterThrowLaunch  _multicopter_throw_launch{this};
+	// Safety			_safety{};
 	WorkerThread 		_worker_thread{};
-	ModeManagement  	_mode_management{
-#ifndef CONSTRAINED_FLASH
-		_health_and_arming_checks.externalChecks()
-#endif
-	};
-	UserModeIntention	_user_mode_intention {this, _vehicle_status, _health_and_arming_checks, &_mode_management};
+// 	ModeManagement  	_mode_management{
+// #ifndef CONSTRAINED_FLASH
+// 		_health_and_arming_checks.externalChecks()
+// #endif
+// 	};
+	// UserModeIntention	_user_mode_intention {this, _vehicle_status, _health_and_arming_checks, &_mode_management};
 
-	const failsafe_flags_s &_failsafe_flags{_health_and_arming_checks.failsafeFlags()};
-	HomePosition 		_home_position{_failsafe_flags};
-	config_overrides_s   _config_overrides{};
+	// const failsafe_flags_s &_failsafe_flags{_health_and_arming_checks.failsafeFlags()};
+	// HomePosition 		_home_position{_failsafe_flags};
+	// config_overrides_s   _config_overrides{};
 
 
 	Hysteresis _auto_disarm_landed{false};
@@ -243,7 +243,7 @@ private:
 
 	hrt_abstime _last_health_and_arming_check{0};
 
-	uint8_t		_battery_warning{battery_status_s::BATTERY_WARNING_NONE};
+	// uint8_t		_battery_warning{battery_status_s::BATTERY_WARNING_NONE};
 
 	bool _failsafe_user_override_request{false}; ///< override request due to stick movements
 
@@ -265,9 +265,9 @@ private:
 	vehicle_land_detected_s	_vehicle_land_detected{};
 
 	// commander publications
-	actuator_armed_s        _actuator_armed{};
+	// actuator_armed_s        _actuator_armed{};
 	vehicle_control_mode_s  _vehicle_control_mode{};
-	vtol_vehicle_status_s	_vtol_vehicle_status{};
+	// vtol_vehicle_status_s	_vtol_vehicle_status{};
 
 	// Subscriptions
 	uORB::Subscription					_action_request_sub{ORB_ID(action_request)};
@@ -278,7 +278,7 @@ private:
 	uORB::Subscription					_vehicle_command_sub{ORB_ID(vehicle_command)};
 	uORB::Subscription					_vehicle_command_mode_executor_sub{ORB_ID(vehicle_command_mode_executor)};
 	uORB::Subscription					_vehicle_land_detected_sub{ORB_ID(vehicle_land_detected)};
-	uORB::Subscription					_vtol_vehicle_status_sub{ORB_ID(vtol_vehicle_status)};
+	// uORB::Subscription					_vtol_vehicle_status_sub{ORB_ID(vtol_vehicle_status)};
 
 	uORB::SubscriptionInterval				_parameter_update_sub{ORB_ID(parameter_update), 1_s};
 
@@ -292,7 +292,7 @@ private:
 	uORB::SubscriptionData<offboard_control_mode_s>		_offboard_control_mode_sub{ORB_ID(offboard_control_mode)};
 
 	// Publications
-	uORB::Publication<actuator_armed_s>			_actuator_armed_pub{ORB_ID(actuator_armed)};
+	// uORB::Publication<actuator_armed_s>			_actuator_armed_pub{ORB_ID(actuator_armed)};
 	// uORB::Publication<actuator_test_s>			_actuator_test_pub{ORB_ID(actuator_test)};
 	uORB::Publication<failure_detector_status_s>		_failure_detector_status_pub{ORB_ID(failure_detector_status)};
 	uORB::Publication<vehicle_command_ack_s>		_vehicle_command_ack_pub{ORB_ID(vehicle_command_ack)};

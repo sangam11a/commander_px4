@@ -3113,16 +3113,6 @@
               "message": "Already higher than takeoff altitude (not descending)",
               "name": "navigator_takeoff_already_higher"
             },
-            "2440093": {
-              "arguments": [
-                {
-                  "name": "arg0",
-                  "type": "float"
-                }
-              ],
-              "message": "Unsupported ARM_DISARM param: {1:.3}",
-              "name": "commander_unsupported_arm_disarm_param"
-            },
             "2474944": {
               "message": "Critical battery level, land now",
               "name": "commander_failsafe_enter_crit_bat_warn"
@@ -3565,10 +3555,6 @@
             "7028282": {
               "message": "Airspeed sensor failure detected. Check connection and reboot",
               "name": "airspeed_selector_sensor_failure_disarmed"
-            },
-            "7067274": {
-              "message": "Mission start denied! No valid mission",
-              "name": "commander_mission_start_denied_no_mission"
             },
             "710679": {
               "message": "Mission failure: unable to reach heading within timeout",
