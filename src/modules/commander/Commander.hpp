@@ -35,7 +35,7 @@
 
 /*   Helper classes  */
 // #include "failsafe/failsafe.h"
-#include "failure_detector/FailureDetector.hpp"
+// #include "failure_detector/FailureDetector.hpp"
 // #include "HealthAndArmingChecks/HealthAndArmingChecks.hpp"
 // #include "HomePosition.hpp"
 // #include "ModeManagement.hpp"
@@ -55,7 +55,7 @@
 #include <uORB/Publication.hpp>
 // #include <uORB/topics/actuator_armed.h>
 // #include <uORB/topics/actuator_test.h>
-#include <uORB/topics/failure_detector_status.h>
+// #include <uORB/topics/failure_detector_status.h>
 #include <uORB/topics/vehicle_command_ack.h>
 #include <uORB/topics/vehicle_control_mode.h>
 #include <uORB/topics/vehicle_status.h>
@@ -66,7 +66,7 @@
 #include <uORB/SubscriptionMultiArray.hpp>
 #include <uORB/topics/action_request.h>
 #include <uORB/topics/cpuload.h>
-#include <uORB/topics/distance_sensor.h>
+// #include <uORB/topics/distance_sensor.h>
 #include <uORB/topics/iridiumsbd_status.h>
 #include <uORB/topics/manual_control_setpoint.h>
 #include <uORB/topics/mission_result.h>
@@ -78,12 +78,12 @@
 #include <uORB/topics/system_power.h>
 #include <uORB/topics/telemetry_status.h>
 #include <uORB/topics/vehicle_command.h>
-#include <uORB/topics/vehicle_global_position.h>
-#include <uORB/topics/vehicle_land_detected.h>
+// #include <uORB/topics/vehicle_global_position.h>
+// #include <uORB/topics/vehicle_land_detected.h>
 // #include <uORB/topics/vtol_vehicle_status.h>
 
 using math::constrain;
-using systemlib::Hysteresis;
+// using systemlib::Hysteresis;
 
 typedef enum {
 	TRANSITION_DENIED = -1,
@@ -201,7 +201,7 @@ private:
 
 	// Failsafe		_failsafe_instance{this};
 	// FailsafeBase		&_failsafe{_failsafe_instance};
-	FailureDetector		_failure_detector{this};
+	// FailureDetector		_failure_detector{this};
 	// HealthAndArmingChecks	_health_and_arming_checks{this, _vehicle_status};
 	// MulticopterThrowLaunch  _multicopter_throw_launch{this};
 	// Safety			_safety{};
@@ -218,8 +218,8 @@ private:
 	// config_overrides_s   _config_overrides{};
 
 
-	Hysteresis _auto_disarm_landed{false};
-	Hysteresis _auto_disarm_killed{false};
+	// Hysteresis _auto_disarm_landed{false};
+	// Hysteresis _auto_disarm_killed{false};
 
 	hrt_abstime _datalink_last_heartbeat_open_drone_id_system{0};
 	hrt_abstime _datalink_last_heartbeat_avoidance_system{0};
@@ -245,12 +245,12 @@ private:
 
 	// uint8_t		_battery_warning{battery_status_s::BATTERY_WARNING_NONE};
 
-	bool _failsafe_user_override_request{false}; ///< override request due to stick movements
+	// bool _failsafe_user_override_request{false}; ///< override request due to stick movements
 
 	bool _open_drone_id_system_lost{true};
 	bool _avoidance_system_lost{false};
 	bool _onboard_controller_lost{false};
-	bool _parachute_system_lost{true};
+	// bool _parachute_system_lost{true};
 
 	bool _last_overload{false};
 	bool _mode_switch_mapped{false};
@@ -262,7 +262,7 @@ private:
 	bool _have_taken_off_since_arming{false};
 	bool _status_changed{true};
 
-	vehicle_land_detected_s	_vehicle_land_detected{};
+	// vehicle_land_detected_s	_vehicle_land_detected{};
 
 	// commander publications
 	// actuator_armed_s        _actuator_armed{};
@@ -277,7 +277,7 @@ private:
 	uORB::Subscription					_system_power_sub{ORB_ID(system_power)};
 	uORB::Subscription					_vehicle_command_sub{ORB_ID(vehicle_command)};
 	uORB::Subscription					_vehicle_command_mode_executor_sub{ORB_ID(vehicle_command_mode_executor)};
-	uORB::Subscription					_vehicle_land_detected_sub{ORB_ID(vehicle_land_detected)};
+	// uORB::Subscription					_vehicle_land_detected_sub{ORB_ID(vehicle_land_detected)};
 	// uORB::Subscription					_vtol_vehicle_status_sub{ORB_ID(vtol_vehicle_status)};
 
 	uORB::SubscriptionInterval				_parameter_update_sub{ORB_ID(parameter_update), 1_s};
@@ -288,13 +288,13 @@ private:
 	uORB::Subscription					_power_button_state_sub {ORB_ID(power_button_state)};
 #endif // BOARD_HAS_POWER_CONTROL
 
-	uORB::SubscriptionData<mission_result_s>		_mission_result_sub{ORB_ID(mission_result)};
+	// uORB::SubscriptionData<mission_result_s>		_mission_result_sub{ORB_ID(mission_result)};
 	uORB::SubscriptionData<offboard_control_mode_s>		_offboard_control_mode_sub{ORB_ID(offboard_control_mode)};
 
 	// Publications
 	// uORB::Publication<actuator_armed_s>			_actuator_armed_pub{ORB_ID(actuator_armed)};
 	// uORB::Publication<actuator_test_s>			_actuator_test_pub{ORB_ID(actuator_test)};
-	uORB::Publication<failure_detector_status_s>		_failure_detector_status_pub{ORB_ID(failure_detector_status)};
+	// uORB::Publication<failure_detector_status_s>		_failure_detector_status_pub{ORB_ID(failure_detector_status)};
 	uORB::Publication<vehicle_command_ack_s>		_vehicle_command_ack_pub{ORB_ID(vehicle_command_ack)};
 	uORB::Publication<vehicle_command_s>			_vehicle_command_pub{ORB_ID(vehicle_command)};
 	uORB::Publication<vehicle_control_mode_s>		_vehicle_control_mode_pub{ORB_ID(vehicle_control_mode)};

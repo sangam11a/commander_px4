@@ -1699,7 +1699,7 @@ void Commander::updateParameters()
 
 	_vehicle_status.avoidance_system_required = _param_com_obs_avoid.get();
 
-	_auto_disarm_killed.set_hysteresis_time_from(false, _param_com_kill_disarm.get() * 1_s);
+	// _auto_disarm_killed.set_hysteresis_time_from(false, _param_com_kill_disarm.get() * 1_s);
 
 	// const bool is_rotary = is_rotary_wing(_vehicle_status) || (is_vtol(_vehicle_status)
 	// 		       && _vtol_vehicle_status.vehicle_vtol_state != vtol_vehicle_status_s::VEHICLE_VTOL_STATE_FW);
@@ -1722,9 +1722,9 @@ void Commander::updateParameters()
 	// _vehicle_status.is_vtol_tailsitter = is_vtol_tailsitter(_vehicle_status);
 
 	// _mode_switch_mapped = (RC_MAP_FLTMODE > 0)
-	if (_param_rc_map_fltmode != PARAM_INVALID && (param_get(_param_rc_map_fltmode, &value_int32) == PX4_OK)) {
-		_mode_switch_mapped = (value_int32 > 0);
-	}
+	// if (_param_rc_map_fltmode != PARAM_INVALID && (param_get(_param_rc_map_fltmode, &value_int32) == PX4_OK)) {
+	// 	_mode_switch_mapped = (value_int32 > 0);
+	// }
 
 }
 

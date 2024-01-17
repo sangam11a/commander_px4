@@ -3257,10 +3257,6 @@
               "message": "Ignoring mission clear command, busy",
               "name": "mavlink_mission_ignore_clear"
             },
-            "4277609": {
-              "message": "Takeoff detected",
-              "name": "commander_takeoff_detected"
-            },
             "439666": {
               "message": "Ignoring mission item, no transfer in progress",
               "name": "mavlink_mission_no_transfer"
@@ -3494,10 +3490,6 @@
             "6415112": {
               "message": "RC trim calibration completed",
               "name": "commander_cal_trim_done"
-            },
-            "6843301": {
-              "message": "Parachute system regained",
-              "name": "commander_parachute_regained"
             },
             "6847604": {
               "message": "Quad-chute triggered due to maximum roll angle exceeded",
@@ -3791,10 +3783,6 @@
             "9758530": {
               "message": "Mission item could not be set",
               "name": "mission_item_set_failed"
-            },
-            "9844908": {
-              "message": "Landing detected",
-              "name": "commander_landing_detected"
             }
           }
         },

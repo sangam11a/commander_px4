@@ -640,7 +640,7 @@ extern "C" __EXPORT int commander_main(int argc, char *argv[])
 Commander::Commander() :
 	ModuleParams(nullptr)
 {
-	_vehicle_land_detected.landed = true;
+	// _vehicle_land_detected.landed = true;
 
 	_vehicle_status.arming_state = vehicle_status_s::ARMING_STATE_DISARMED;
 	_vehicle_status.system_id = 1;
@@ -1197,13 +1197,13 @@ void Commander::updateParameters()
 
 	_vehicle_status.avoidance_system_required = _param_com_obs_avoid.get();
 
-	_auto_disarm_killed.set_hysteresis_time_from(false, _param_com_kill_disarm.get() * 1_s);
+	// _auto_disarm_killed.set_hysteresis_time_from(false, _param_com_kill_disarm.get() * 1_s);
 
 
 	// _mode_switch_mapped = (RC_MAP_FLTMODE > 0)
-	if (_param_rc_map_fltmode != PARAM_INVALID && (param_get(_param_rc_map_fltmode, &value_int32) == PX4_OK)) {
-		_mode_switch_mapped = (value_int32 > 0);
-	}
+	// if (_param_rc_map_fltmode != PARAM_INVALID && (param_get(_param_rc_map_fltmode, &value_int32) == PX4_OK)) {
+	// 	_mode_switch_mapped = (value_int32 > 0);
+	// }
 
 }
 
@@ -1449,40 +1449,40 @@ bool Commander::getPrearmState() const
 }
 
 
-void Commander::landDetectorUpdate()
-{
-	if (_vehicle_land_detected_sub.updated()) {
-		const bool was_landed = _vehicle_land_detected.landed;
-		_vehicle_land_detected_sub.copy(&_vehicle_land_detected);
+// void Commander::landDetectorUpdate()
+// {
+// 	if (_vehicle_land_detected_sub.updated()) {
+// 		const bool was_landed = _vehicle_land_detected.landed;
+// 		_vehicle_land_detected_sub.copy(&_vehicle_land_detected);
 
-		// Only take actions if armed
-		if (isArmed()) {
-			if (!was_landed && _vehicle_land_detected.landed) {
-				mavlink_log_info(&_mavlink_log_pub, "Landing detected\t");
-				events::send(events::ID("commander_landing_detected"), events::Log::Info, "Landing detected");
+// 		// Only take actions if armed
+// 		if (isArmed()) {
+// 			if (!was_landed && _vehicle_land_detected.landed) {
+// 				mavlink_log_info(&_mavlink_log_pub, "Landing detected\t");
+// 				events::send(events::ID("commander_landing_detected"), events::Log::Info, "Landing detected");
 
-			} else if (was_landed && !_vehicle_land_detected.landed) {
-				mavlink_log_info(&_mavlink_log_pub, "Takeoff detected\t");
-				events::send(events::ID("commander_takeoff_detected"), events::Log::Info, "Takeoff detected");
-				_vehicle_status.takeoff_time = hrt_absolute_time();
-				_have_taken_off_since_arming = true;
-			}
+// 			} else if (was_landed && !_vehicle_land_detected.landed) {
+// 				mavlink_log_info(&_mavlink_log_pub, "Takeoff detected\t");
+// 				events::send(events::ID("commander_takeoff_detected"), events::Log::Info, "Takeoff detected");
+// 				_vehicle_status.takeoff_time = hrt_absolute_time();
+// 				_have_taken_off_since_arming = true;
+// 			}
 
-			// automatically set or update home position
-			// if (_param_com_home_en.get()) {
-			// 	// set the home position when taking off
-			// 	if (!_vehicle_land_detected.landed) {
-			// 		if (was_landed) {
-			// 			_home_position.setHomePosition();
+// 			// automatically set or update home position
+// 			// if (_param_com_home_en.get()) {
+// 			// 	// set the home position when taking off
+// 			// 	if (!_vehicle_land_detected.landed) {
+// 			// 		if (was_landed) {
+// 			// 			_home_position.setHomePosition();
 
-			// 		} else if (_param_com_home_in_air.get()) {
-			// 			_home_position.setInAirHomePosition();
-			// 		}
-			// 	}
-			// }
-		}
-	}
-}
+// 			// 		} else if (_param_com_home_in_air.get()) {
+// 			// 			_home_position.setInAirHomePosition();
+// 			// 		}
+// 			// 	}
+// 			// }
+// 		}
+// 	}
+// }
 
 
 void Commander::checkWorkerThread()
@@ -1703,22 +1703,22 @@ void Commander::dataLinkCheck()
 				_datalink_last_heartbeat_onboard_controller = telemetry.timestamp;
 			}
 
-			if (telemetry.heartbeat_type_parachute) {
-				if (_parachute_system_lost) {
-					_parachute_system_lost = false;
+			// if (telemetry.heartbeat_type_parachute) {
+			// 	if (_parachute_system_lost) {
+			// 		_parachute_system_lost = false;
 
-					if (_datalink_last_heartbeat_parachute_system != 0) {
-						mavlink_log_info(&_mavlink_log_pub, "Parachute system regained\t");
-						events::send(events::ID("commander_parachute_regained"), events::Log::Info, "Parachute system regained");
-					}
-				}
+			// 		if (_datalink_last_heartbeat_parachute_system != 0) {
+			// 			mavlink_log_info(&_mavlink_log_pub, "Parachute system regained\t");
+			// 			events::send(events::ID("commander_parachute_regained"), events::Log::Info, "Parachute system regained");
+			// 		}
+			// 	}
 
-				bool healthy = telemetry.parachute_system_healthy;
+			// 	bool healthy = telemetry.parachute_system_healthy;
 
-				_datalink_last_heartbeat_parachute_system = telemetry.timestamp;
-				_vehicle_status.parachute_system_present = true;
-				_vehicle_status.parachute_system_healthy = healthy;
-			}
+			// 	_datalink_last_heartbeat_parachute_system = telemetry.timestamp;
+			// 	_vehicle_status.parachute_system_present = true;
+			// 	_vehicle_status.parachute_system_healthy = healthy;
+			// }
 
 			if (telemetry.heartbeat_type_open_drone_id) {
 				if (_open_drone_id_system_lost) {
@@ -1778,14 +1778,14 @@ void Commander::dataLinkCheck()
 	}
 
 	// Parachute system
-	if ((hrt_elapsed_time(&_datalink_last_heartbeat_parachute_system) > 3_s)
-	    && !_parachute_system_lost) {
-		mavlink_log_critical(&_mavlink_log_pub, "Parachute system lost");
-		_vehicle_status.parachute_system_present = false;
-		_vehicle_status.parachute_system_healthy = false;
-		_parachute_system_lost = true;
-		_status_changed = true;
-	}
+	// if ((hrt_elapsed_time(&_datalink_last_heartbeat_parachute_system) > 3_s)
+	//     && !_parachute_system_lost) {
+	// 	mavlink_log_critical(&_mavlink_log_pub, "Parachute system lost");
+	// 	_vehicle_status.parachute_system_present = false;
+	// 	_vehicle_status.parachute_system_healthy = false;
+	// 	_parachute_system_lost = true;
+	// 	_status_changed = true;
+	// }
 
 	// OpenDroneID system
 	if ((hrt_elapsed_time(&_datalink_last_heartbeat_open_drone_id_system) > 3_s)
