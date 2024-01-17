@@ -1840,14 +1840,16 @@ int Commander::print_usage(const char *reason)
 	PRINT_MODULE_USAGE_COMMAND("start");
 	PRINT_MODULE_USAGE_PARAM_FLAG('h', "Enable HIL mode", true);
 #ifndef CONSTRAINED_FLASH
+PRINT_MODULE_USAGE_COMMAND_DESCR("hk", "House keeping data");
 	PRINT_MODULE_USAGE_COMMAND_DESCR("calibrate", "Run sensor calibration");
+
 	PRINT_MODULE_USAGE_ARG("mag|baro|accel|gyro", "Calibration type", false);
 	PRINT_MODULE_USAGE_ARG("quick", "Quick calibration (accel only, not recommended)", false);
 
-	PRINT_MODULE_USAGE_COMMAND("takeoff");
-	PRINT_MODULE_USAGE_COMMAND("land");
+	// PRINT_MODULE_USAGE_COMMAND("takeoff");
+	// PRINT_MODULE_USAGE_COMMAND("land");
 #endif
-	PRINT_MODULE_USAGE_DEFAULT_COMMANDS();
+	// PRINT_MODULE_USAGE_DEFAULT_COMMANDS();
 
 	return 1;
 }
