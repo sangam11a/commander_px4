@@ -2698,10 +2698,6 @@
               "message": "Primary airspeed index bigger than number connected sensors, taking last sensor",
               "name": "airspeed_selector_prim_too_high"
             },
-            "12420351": {
-              "message": "Arming denied: switch to manual mode first",
-              "name": "commander_arm_denied_not_manual"
-            },
             "12464476": {
               "message": "Ready for throw launch",
               "name": "mc_throw_launch_ready"
@@ -2999,16 +2995,6 @@
               "message": "Cruise speed has been constrained by maximum speed",
               "name": "mc_pos_ctrl_cruise_set"
             },
-            "16017271": {
-              "arguments": [
-                {
-                  "name": "arg0",
-                  "type": "px4::arm_disarm_reason_t"
-                }
-              ],
-              "message": "Disarmed by {1}",
-              "name": "commander_disarmed_by"
-            },
             "16048801": {
               "arguments": [
                 {
@@ -3062,10 +3048,6 @@
               "message": "RTL: completed, loitering",
               "name": "rtl_completed_loiter"
             },
-            "1749061": {
-              "message": "Arming denied: throttle above center",
-              "name": "commander_arm_denied_throttle_center"
-            },
             "1801328": {
               "arguments": [
                 {
@@ -3100,10 +3082,6 @@
             "2020940": {
               "message": "Roll command reduced due to uncertain velocity/wind estimates!",
               "name": "npfg_roll_command_uncertain"
-            },
-            "2066387": {
-              "message": "Arming denied: calibrating",
-              "name": "commander_arm_denied_calibrating"
             },
             "2087806": {
               "message": "Orbit radius limit exceeded",
@@ -3489,10 +3467,6 @@
               "message": "Ascent speed has been constrained by max speed",
               "name": "mc_pos_ctrl_up_vel_set"
             },
-            "5874720": {
-              "message": "Arming denied: high throttle",
-              "name": "commander_arm_denied_throttle_high"
-            },
             "5911339": {
               "message": "Received unknown mission type, abort",
               "name": "mavlink_mission_recv_unknown_mis_type"
@@ -3728,10 +3702,6 @@
               "message": "Ignoring mission request, currently busy",
               "name": "mavlink_mission_mis_req_ignored_busy"
             },
-            "9091509": {
-              "message": "Disarming denied: not landed",
-              "name": "commander_disarm_denied_not_landed"
-            },
             "9092852": {
               "message": "Unexpected waypoint index, aborting mission transfer",
               "name": "mavlink_mission_wp_unexpected2"
@@ -3785,16 +3755,6 @@
             "9476947": {
               "message": "Quad-chute triggered due to uncommanded descent detection",
               "name": "vtol_att_ctrl_quadchute_alt_loss"
-            },
-            "9489139": {
-              "arguments": [
-                {
-                  "name": "arg0",
-                  "type": "px4::arm_disarm_reason_t"
-                }
-              ],
-              "message": "Armed by {1}",
-              "name": "commander_armed_by"
             },
             "9537079": {
               "arguments": [
